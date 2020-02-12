@@ -1,5 +1,5 @@
 body{
-  background-color: red;
+  background-color: white;
   padding: 0px;
   margin: 0px;
 }
@@ -12,7 +12,7 @@ body{
   height: 40px;
   width: 100%;
   color: blue;
-  background-color: yellow;
+  background-color: white;
 }
 
 .menu {
@@ -31,7 +31,7 @@ body{
 
 .button:hover {
   color: blue;
-  background-color: green;
+  background-color: rgba(230, 230, 230, 0.8);
 }
 
 .landing {
@@ -41,7 +41,7 @@ body{
 
 .about {
   font-family:'Raleway', sans-serif;
-  color: white;
+  color: black;
   font-size: 20px;
   margin: 0.3em;
 }
@@ -53,7 +53,7 @@ body{
 }
 
 #shop {
-  color: white;
+  color: grey;
   font-family:'Raleway', sans-serif;
   font-size: 40px;
   margin-left: 0.5em;
@@ -66,7 +66,7 @@ body{
   width: 100%;
   bottom: 0;
   height: 150px;
-  background-color: yellow;
+  background-color: rgba(230, 230, 230, 0.3);
 }
 
 .footerList {
@@ -76,6 +76,29 @@ body{
   margin: 1em;
   padding-top: 1em;
 }
+
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.grid_item{
+    width: 50%;
+    height: auto;
+   
+
+}
+
+
+.grid img {
+  width: calc(100% - (50px * 2));
+  margin: 50px 50px 50px 50px;
+
+}
+
+
 
 li{
   margin-bottom: 0.5em;
