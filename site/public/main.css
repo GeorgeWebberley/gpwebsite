@@ -2,6 +2,7 @@ body{
   background-color: red;
   padding: 0px;
   margin: 0px;
+  width:100vw;
 }
 
 #nav-bar {
@@ -47,4 +48,12 @@ body{
   bottom: 0;
   height: 150px;
   background-color: yellow;
+}
+
+.landing{
+  width: 100%;
+}
+
+.imageWrap{
+  width: 100%;
 }

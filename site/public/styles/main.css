@@ -1,0 +1,50 @@
+body{
+  background-color: red;
+  padding: 0px;
+  margin: 0px;
+}
+
+#nav-bar {
+  font-family: 'Lemonada', cursive;
+  position: fixed;
+  top: 0;
+  display: inline-block;
+  height: 40px;
+  width: 100%;
+  color: blue;
+  background-color: yellow;
+}
+
+.menu {
+	float: right;
+}
+
+.button {
+  cursor: pointer;
+  transition-duration: 0.4s;
+  border: 0px;
+  margin: 0px;
+  float: right;
+  height: 40px;
+  background-color: transparent;
+}
+
+.button:hover {
+  color: blue;
+  background-color: green;
+  transition:
+}
+
+.about {
+  font-family: 'Lemonada', cursive;
+  color: white;
+  font-size: 20px;
+  margin-top: 40px;
+}
+
+.footer {
+  width: 100%;
+  bottom: 0;
+  height: 150px;
+  background-color: yellow;
+}
