@@ -5,7 +5,7 @@ body{
 }
 
 #nav-bar {
-  font-family: 'Lemonada', cursive;
+  font-family:'Raleway', sans-serif;
   position: fixed;
   top: 0;
   display: inline-block;
@@ -36,14 +36,31 @@ body{
 
 .landing {
   width: 100%;
+  margin-top: 40px;
 }
 
 .about {
-  font-family: 'Lemonada', cursive;
+  font-family:'Raleway', sans-serif;
   color: white;
   font-size: 20px;
-  margin-top: 40px;
+  margin: 0.3em;
 }
+
+.line {
+  width: 100%;
+  height: 3px;
+  background-image: radial-gradient(white, transparent, transparent);
+}
+
+#shop {
+  color: white;
+  font-family:'Raleway', sans-serif;
+  font-size: 40px;
+  margin-left: 0.5em;
+  margin-top: 0.2em;
+  display: block;
+}
+
 
 .footer {
   width: 100%;
