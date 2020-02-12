@@ -32,7 +32,10 @@ body{
 .button:hover {
   color: blue;
   background-color: green;
-  transition:
+}
+
+.landing {
+  width: 100%;
 }
 
 .about {
