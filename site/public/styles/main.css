@@ -68,3 +68,15 @@ body{
   height: 150px;
   background-color: yellow;
 }
+
+.footerList {
+  font-size: 18px;
+  columns: 2;
+  list-style: none;
+  margin: 1em;
+  padding-top: 1em;
+}
+
+li{
+  margin-bottom: 0.5em;
+}
