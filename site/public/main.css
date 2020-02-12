@@ -1,6 +1,5 @@
 body{
   background-color: red;
-  height: 100vh;
   padding: 0px;
   margin: 0px;
 }
@@ -9,7 +8,7 @@ body{
   font-family: 'Lemonada', cursive;
   position: fixed;
   top: 0;
-  display: block;
+  display: inline-block;
   height: 40px;
   width: 100%;
   color: blue;
@@ -34,4 +33,18 @@ body{
   color: blue;
   background-color: green;
   transition:
+}
+
+.about {
+  font-family: 'Lemonada', cursive;
+  color: white;
+  font-size: 20px;
+  margin-top: 40px;
+}
+
+.footer {
+  width: 100%;
+  bottom: 0;
+  height: 150px;
+  background-color: yellow;
 }
