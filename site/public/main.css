@@ -6,6 +6,7 @@ body{
 }
 
 #nav-bar {
+  font-family: 'Lemonada', cursive;
   position: fixed;
   top: 0;
   display: block;
@@ -17,5 +18,20 @@ body{
 
 .menu {
 	float: right;
+}
 
+.button {
+  cursor: pointer;
+  transition-duration: 0.4s;
+  border: 0px;
+  margin: 0px;
+  float: right;
+  height: 40px;
+  background-color: transparent;
+}
+
+.button:hover {
+  color: blue;
+  background-color: green;
+  transition:
 }
