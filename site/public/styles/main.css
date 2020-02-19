@@ -87,15 +87,15 @@ body{
 .grid_item{
     width: 50%;
     height: auto;
-   
+}
+
+.overlay {
 
 }
 
-
 .grid img {
   width: calc(100% - (50px * 2));
-  margin: 50px 50px 50px 50px;
-
+  background-color: black;
 }
 
 
