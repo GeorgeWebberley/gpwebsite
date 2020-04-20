@@ -1,11 +1,8 @@
 <section class="admin-form-container">
   <form class="admin-form" action="/index" method="post">
-    <div class="form-row form-row-end btn-row">
-      <div class="form-item">
+    <div class="form-grid">
         <label>Jewellery Name</label>
         <input required type="text" name="name">
-      </div>
-      <div class="form-item">
         <label>Jewellery Type</label>
         <!-- Create a drop down list of all the different types of jewellery. -->
         <select required name="type" >
@@ -14,25 +11,19 @@
             <option value="ring">Ring</option>
             <option value="bracelet">Bracelet</option>
         </select>
-      </div>
-      <div class="form-item">
         <label>Price</label>
-         <!-- format the date-time so that we only save the date -->
-         <span>£</span>
-        <input type="number" name="price" step="any" value="1.00">
-      </div>
-      <div class="form-item-no-grow">
+         <section>
+           <span>£</span>
+           <input type="number" name="price" step="any" value="1.00">
+         </section>
         <label>Image</label>
         <input type="file" name="image">
-      </div>
-      <div class="form-item">
         <label>Description</label>
         <textarea name="description"></textarea>
-      </div>
 
+      </div>
       <!-- links are used for cancel, buttons used for form submits -->
       <a class="btn btn-danger" href="/books">Cancel</a>
       <button class="btn btn-primary" type="submit" name="button">Create Item</button>
-    </div>
   </form>
 </section>

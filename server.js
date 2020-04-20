@@ -34,7 +34,10 @@ app.use("/jewellery", jewelleryRouter);
 async function create() {
   try {
     const db = await sqlite.open("./db.sqlite");
-    await db.run("create table jewellery (id, name, type, price)");
+
+    await db.run(
+      "create table if not exists jewellery (id, name, type, price)"
+    );
   } catch (e) {
     console.log(e);
   }
