@@ -1,12 +1,17 @@
-body{
+body {
+  position: relative;
+  min-height: 100vh;
   background-color: white;
   padding: 0px;
   margin: 0px;
 }
 
+.content-wrap {
+  padding-bottom: 175px;
+}
 #nav-bar {
-  font-family:'Raleway', sans-serif;
-  position: fixed;
+  font-family: "Raleway", sans-serif;
+  position: sticky;
   top: 0;
   display: inline-block;
   height: 40px;
@@ -17,7 +22,7 @@ body{
 }
 
 .menu {
-	float: right;
+  float: right;
 }
 
 .button {
@@ -37,11 +42,10 @@ body{
 
 .landing {
   width: 100%;
-  margin-top: 40px;
 }
 
 .about {
-  font-family:'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   color: black;
   font-size: 20px;
   margin: 0.3em;
@@ -55,18 +59,18 @@ body{
 
 #shop {
   color: grey;
-  font-family:'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 40px;
   margin-left: 0.5em;
   margin-top: 0.2em;
   display: block;
 }
 
-
 .footer {
+  position: absolute;
   width: 100%;
   bottom: 0;
-  height: 150px;
+  height: 175px;
   background-color: rgba(230, 230, 230, 0.3);
 }
 
@@ -78,18 +82,18 @@ body{
   padding-top: 1em;
 }
 
-.grid{
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 5%;
-    margin-right: 5%;
-    position: relative;
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 5%;
+  margin-right: 5%;
+  position: relative;
 }
 
-.grid_item{
-    width: 50%;
-    height: auto;
-    position: relative;
+.grid_item {
+  width: 50%;
+  height: auto;
+  position: relative;
 }
 
 .overlay {
@@ -118,20 +122,17 @@ body{
   padding: 16px 32px;
   transition: 0.3s ease;
 }
-.overlay:hover{
+.overlay:hover {
   opacity: 0.3;
   cursor: pointer;
 }
-.overlay:hover .text{
+.overlay:hover .text {
   opacity: 1;
 }
 
-
-
-li{
+li {
   margin-bottom: 0.5em;
 }
-
 
 .slideshow-container {
   width: 100%;
@@ -139,11 +140,11 @@ li{
 }
 
 .mySlides {
-display:none;
-
+  display: none;
 }
 
-.prev, .next {
+.prev,
+.next {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -161,4 +162,16 @@ display:none;
 .next {
   right: 0;
   border-radius: 3px 0 0 3px;
+}
+
+/* -----------ADMIN FORM--------- */
+
+.admin-form-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-form {
 }

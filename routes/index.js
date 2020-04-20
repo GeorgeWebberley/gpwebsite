@@ -11,4 +11,8 @@ router.get("/about", (req, res) => {
   res.send("About");
 });
 
+router.get("/admin", (req, res) => {
+  res.render("admin");
+});
+
 module.exports = router;

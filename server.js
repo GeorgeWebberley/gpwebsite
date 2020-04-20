@@ -39,10 +39,6 @@ async function create() {
     console.log(e);
   }
 }
-// 'on' is like an event listener. So if error...
-db.on("error", err => console.error(err));
-// 'once' means it will only do it once (in this case, upon opening database for the first time)
-db.once("open", () => console.log("Connected to Mongoose..."));
 
 // ---- SERVER CONNECT ----
 app.listen(process.env.PORT || 3000, () => {
