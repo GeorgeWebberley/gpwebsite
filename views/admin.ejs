@@ -1,5 +1,8 @@
+<%- include ("./partials/message.ejs") %>
 <section class="admin-form-container">
-  <form class="admin-form" action="/index" method="post">
+  <form class="admin-form" action="/admin" method="post" enctype="multipart/form-data">
+    <h1 class="admin-form-title">Add New Item</h1>
+    <div class="bar"></div>
     <div class="form-grid">
         <label>Jewellery Name</label>
         <input required type="text" name="name">
@@ -13,17 +16,18 @@
         </select>
         <label>Price</label>
          <section>
-           <span>£</span>
-           <input type="number" name="price" step="any" value="1.00">
+           <span class="pound">£</span>
+           <input required type="number" name="price" step="any" value="1.00">
          </section>
         <label>Image</label>
-        <input type="file" name="image">
+        <input required type="file" name="image">
         <label>Description</label>
-        <textarea name="description"></textarea>
-
+        <textarea required name="description" rows="3"></textarea>
       </div>
-      <!-- links are used for cancel, buttons used for form submits -->
-      <a class="btn btn-danger" href="/books">Cancel</a>
-      <button class="btn btn-primary" type="submit" name="button">Create Item</button>
+      <div class="btn-row">
+        <!-- links are used for cancel, buttons used for form submits -->
+        <a class="btn btn-danger" href="/books">Cancel</a>
+        <button class="btn btn-primary" type="submit" name="button">Create Item</button>
+      </div>
   </form>
 </section>

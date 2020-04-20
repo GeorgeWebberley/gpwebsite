@@ -23,25 +23,32 @@ app.use(expressLayouts);
 // tells express where our public files will be (i.e. in a folder called public)
 app.use(express.static("public"));
 
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
+
 const indexRouter = require("./routes/index");
-// set the index to be on '/'
-app.use("/", indexRouter);
 
 const jewelleryRouter = require("./routes/jewellery");
-app.use("/jewellery", jewelleryRouter);
 
 // ---- DATABASE SETUP ----
 async function create() {
   try {
     const db = await sqlite.open("./db.sqlite");
-
-    await db.run(
-      "create table if not exists jewellery (id, name, type, price)"
-    );
+    const jewelleryTable = `
+      CREATE TABLE IF NOT EXISTS jewellery (
+        name VARCHAR(255),
+        type VARCHAR(255),
+        price REAL,
+        imageName TEXT,
+        description TEXT)`;
+    await db.run(jewelleryTable);
   } catch (e) {
     console.log(e);
   }
 }
+
+// set the index to be on '/' and jewellery on'/jewellery
+app.use("/", indexRouter);
+app.use("/jewellery", jewelleryRouter);
 
 // ---- SERVER CONNECT ----
 app.listen(process.env.PORT || 3000, () => {

@@ -167,6 +167,7 @@ li {
 /* -----------ADMIN FORM--------- */
 
 .admin-form-container {
+  font-family: "Raleway", sans-serif;
   display: flex;
   width: 100%;
   align-items: center;
@@ -174,18 +175,167 @@ li {
   font-size: 1.5rem;
   margin: 2rem 0;
 }
+
+.admin-form-title {
+  text-align: center;
+  margin: 0;
+  font-weight: normal;
+}
+
+.bar {
+  width: 100%;
+  height: 1px;
+  margin-bottom: 2rem;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    black,
+    rgba(0, 0, 0, 0)
+  );
+}
+
 .form-grid {
+  font-weight: lighter;
   display: grid;
   grid-template-columns: auto auto;
-  grid-row-gap: 2rem;
+  grid-row-gap: 1.5rem;
   grid-column-gap: 2rem;
   margin-bottom: 2rem;
 }
-.form-item {
-  margin: 2rem 0;
+
+.pound {
+  font-size: 0.8rem;
 }
 
 .admin-form {
-  padding: 3rem;
-  border: 2px solid black;
+  padding: 2rem 3rem 3rem 3rem;
+  border: 2px solid grey;
+  background-color: rgb(242, 242, 242);
+}
+
+/* -------------BUTTONS------------- */
+
+.btn {
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  font-family: "Raleway", sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-primary {
+  color: white;
+  background-color: rgb(113, 153, 168);
+}
+
+.btn-danger {
+  color: white;
+  background-color: rgb(179, 125, 125);
+}
+
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* --------MESSAGES------- */
+
+.message {
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+  font-size: 1.5rem;
+  width: 50%;
+  margin: auto;
+  border-radius: 5%;
+  padding: 0.2rem;
+}
+
+.success {
+  border: 1px solid green;
+  color: rgb(22, 54, 24);
+  background-color: rgb(212, 255, 214);
+}
+
+.error {
+  border: 1px solid red;
+  color: rgb(54, 22, 22);
+  background-color: rgb(255, 219, 219);
+}
+
+/* ---------ITEM LIST PAGE ---------- */
+
+.jewellery-list-container {
+  font-family: "Raleway", sans-serif;
+  margin: 0 5%;
+  width: 90%;
+}
+
+.jewellery-list-title {
+  text-transform: capitalize;
+  text-align: center;
+  font-weight: lighter;
+}
+
+.jewellery-list {
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 2rem;
+}
+
+.product {
+}
+
+.img-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.item-img {
+  display: block;
+  width: 100%;
+  height: 20rem;
+}
+
+.item-btn {
+  position: absolute;
+  top: 66%;
+  right: 0;
+  background: rgb(230, 239, 255);
+  border: none;
+  padding: 0.5rem 0.75rem;
+  font-weight: bold;
+  transition: all 0.4s ease;
+  transform: translateX(101%);
+  cursor: pointer;
+}
+.item-btn:hover {
+  color: white;
+  background-color: rgb(36, 47, 66);
+}
+.fa-shopping-cart {
+  margin-right: 0.5rem;
+}
+.img-container:hover .item-btn {
+  transform: translateX(0);
+}
+
+.img-container:hover .item-img {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.item-details-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.item-detail {
+  font-weight: lighter;
+  margin: 0;
 }
