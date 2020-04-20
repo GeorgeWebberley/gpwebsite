@@ -2,12 +2,14 @@
 // if (process.env.NODE_ENV !== "production") {
 //   require("dotenv").config();
 // }
-
+"use strict";
 // ---- IMPORTS ----
 const express = require("express"); // loads module 'express'
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
+const sqlite = require("sqlite");
+create();
 
 // ---- APP SETUP ----
 // set the view engine to ejs
@@ -29,13 +31,14 @@ const jewelleryRouter = require("./routes/jewellery");
 app.use("/jewellery", jewelleryRouter);
 
 // ---- DATABASE SETUP ----
-const mongoose = require("mongoose");
-// mongoose.connect(process.env.DATABASE_URL, {
-mongoose.connect("mongodb://localhost/gpwebsite", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-const db = mongoose.connection;
+async function create() {
+  try {
+    const db = await sqlite.open("./db.sqlite");
+    await db.run("create table jewellery (id, name, type, price)");
+  } catch (e) {
+    console.log(e);
+  }
+}
 // 'on' is like an event listener. So if error...
 db.on("error", err => console.error(err));
 // 'once' means it will only do it once (in this case, upon opening database for the first time)
