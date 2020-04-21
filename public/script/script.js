@@ -35,7 +35,7 @@ function add2Cart() {
       let price = button.dataset.price;
       let imageName = button.dataset.image;
       let id = button.dataset.id;
-      let product = { id: id, name: name, price: price, image: imageName, };
+      let product = { id: id, name: name, price: price, image: imageName, amount: 1 };
       cart = [...cart, product];
       Storage.saveCart(cart);
       addCartItem(product);
@@ -141,9 +141,20 @@ function removeItem(id) {
   cart = cart.filter(item => item.id !== id);
   // this.setCartValues(cart);
   Storage.saveCart(cart);
-  let button = add2CartButtons.find(button => button.dataset.id === id)
+  let button = add2CartButtons.find(button => button.dataset.id === id);
   button.disabled = false;
   button.innerHTML = `<i class="fas fa-shopping-cart"></i> ADD TO BASKET`;
+}
+
+function setCartValues(cart) {
+  let tempTotal = 0;
+  let itemsTotal = 0;
+  cart.map(item => {
+    tempTotal += item.price * item.amount;
+    itemsTotal += item.amount;
+  });
+  cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
+  cartItems.innerText = itemsTotal;
 }
 
 
