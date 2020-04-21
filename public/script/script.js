@@ -1,3 +1,14 @@
+const cartBtn = document.querySelector(".cart-btn");
+const addBtn = document.querySelector(".add-item");
+const closeCartBtn = document.querySelector(".close-cart");
+const clearCartBtn = document.querySelector(".clear-cart");
+const cartDOM = document.querySelector(".cart");
+const cartOverlay = document.querySelector(".cart-overlay");
+const cartItems = document.querySelector(".cart-items");
+const cartTotal = document.querySelector(".cart-total");
+const cartContent = document.querySelector(".cart-content");
+const productsDOM = document.querySelector(".products-center");
+
 let cart = [];
 let buttonsDOM = [];
 
@@ -7,22 +18,30 @@ buttons.forEach(button => {
 
   let id = button.dataset.id;
   let inCart = cart.find(item => item.id === id);
+
   console.log(inCart);
 
   if (inCart) {
     button.innerText = 'In Cart';
     button.disabled = true;
   }
-  button.addEventListener("click", () => {
-    const name = button.dataset.name;
-    const price = button.dataset.price;
-    const imageName = button.dataset.image;
-    const id = button.dataset.id;
-    const product = { id: id, name: name, price: price, image: imageName, };
+  button.addEventListener("click", (event) => {
+    event.target.innerText = 'In Cart';
+    event.target.disabled = true;
 
 
-    Storage.saveCart(product);
-    console.log(Storage.getCart());
+    let name = button.dataset.name;
+    let price = button.dataset.price;
+    let imageName = button.dataset.image;
+    let id = button.dataset.id;
+    let product = { id: id, name: name, price: price, image: imageName, };
+    cart = [...cart, product];
+    Storage.saveCart(cart);
+    addCartItem(product);
+    showCart();
+
+    console.log(cart);
+
 
 
   });
@@ -42,58 +61,29 @@ class Storage {
 
 
 
-var slideIndex = 1;
-showSlides(slideIndex);
 
-// Next/previous controls
-function plusSlides(n) {
-  showSlides((slideIndex += n));
-}
-
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides((slideIndex = n));
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  if (n > slides.length) {
-    slideIndex = 1;
-  }
-  if (n < 1) {
-    slideIndex = slides.length;
-  }
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-
-  slides[slideIndex - 1].style.display = "block";
-}
 //SHOPPING CART//
 //variables
 
-const cartBtn = document.querySelector(".cart-btn");
-const addBtn = document.querySelector(".add-item");
-const closeCartBtn = document.querySelector(".close-cart");
-const clearCartBtn = document.querySelector(".clear-cart");
-const cartDOM = document.querySelector(".cart");
-const cartOverlay = document.querySelector(".cart-overlay");
-const cartItems = document.querySelector(".cart-items");
-const cartTotal = document.querySelector(".cart-total");
-const cartContent = document.querySelector(".cart-content");
-const productsDOM = document.querySelector(".products-center");
+
 
 cartBtn.addEventListener("click", () => {
-  cartOverlay.classList.add("transparentBackground");
-  cartDOM.classList.add("showCart");
-});
+  showCart();
+})
 
 closeCartBtn.addEventListener("click", () => {
+  removeCart();
+})
+
+function showCart() {
+  cartOverlay.classList.add("transparentBackground");
+  cartDOM.classList.add("showCart");
+}
+
+function removeCart() {
   cartOverlay.classList.remove("transparentBackground");
   cartDOM.classList.remove("showCart");
-});
-
+}
 // cartOverlay.addEventListener('click', () => {
 //   cartOverlay.classList.remove('transparentBackground');
 //   cartDOM.classList.remove('showCart');
@@ -104,7 +94,7 @@ function addCartItem(item) {
   div.classList.add("cart-product");
   div.innerHTML = `
     <div class="product-image-wrapper">
-      <img src="${item.image}" alt="image of a ring" />
+      <img src="/db_images/${item.image}" alt="image of a ring" />
     </div>
     <div class="product-info-wrapper">
       <div class="product-info">
@@ -174,173 +164,48 @@ function cartLogic() {
 
 cartLogic();
 
-// let cart = [];
-// let buttonsDOM = [];
+document.addEventListener('DOMContentLoaded', () => {
 
-// class Products {
-//   async getProducts() {
-//     try {
-//       let contentful = await client.getEntries({
-//         content_type: 'comfyHouseProducts'
-//       });
-//       console.log(contentful);
-//       // let result = await fetch('products.json');
-//       // let data = await result.json();
-//       let products = contentful.items;
-//       products = products.map(item => {
-//         const { title, price } = item.fields;
-//         const { id } = item.sys;
-//         const image = item.fields.image.fields.file.url;
-//         return {
-//           title,
-//           price,
-//           id,
-//           image
-//         };
-//       });
-//       return products;
-//     } catch (error) {
-//       console.log(error);
-//     }
+  setupAPP();
+  products.getProducts().
+    then(products => {
+      ui.displayProducts(products)
+      Storage.saveProducts(products);
+    }).
+    then(() => {
+      ui.getBagButtons();
+      ui.cartLogic();
+    });
 
-//   }
-// }
-// class UI {
-//   displayProducts(products) {
-//     let result = '';
-//     products.forEach(product => {
-//       result += `
-//             <article class="product">
-//                 <div class="img-container">
-//                     <img src="${product.image}" alt="product" class="product-img">
-//                     <button class="bag-btn" data-id="${product.id}"><i class="fas fa-shopping-cart"></i>add to cart</button>
-//                 </div>
-//                 <h3>${product.title}</h3>
-//                 <h4>$${product.price}</h4>
-//             </article>
-//             `;
-//     });
-//     productsDOM.innerHTML = result;
-//   }
-//   getBagButtons() {
-//     const buttons = [...document.querySelectorAll('.bag-btn')];
-//     buttonsDOM = buttons;
-//     buttons.forEach(button => {
-//       let id = button.dataset.id;
-//       let inCart = cart.find(item => item.id === id);
-//       if (inCart) {
-//         button.innerText = 'In Cart';
-//         button.disabled = true;
-//       }
-//       button.addEventListener('click', (event) => {
-//         event.target.innerText = 'In Cart';
-//         event.target.disabled = true;
-//         let cartItem = { ...Storage.getProduct(id), amount: 1 };
-//         cart = [...cart, cartItem];
-//         Storage.saveCart(cart);
-//         this.setCartValues(cart);
-//         this.addCartItem(cartItem);
-//         this.showCart();
-//       });
-//     });
-//   }
-//   setCartValues(cart) {
-//     let tempTotal = 0;
-//     let itemsTotal = 0;
-//     cart.map(item => {
-//       tempTotal += item.price * item.amount;
-//       itemsTotal += item.amount;
-//     });
-//     cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
-//     cartItems.innerText = itemsTotal;
-//   }
-//   addCartItem(item) {
-//     const div = document.createElement('div');
-//     div.classList.add('cart-item');
-//     div.innerHTML = `
-//             <img src="${item.image}" alt="product">
-//             <div>
-//                 <h4>${item.title}</h4>
-//                 <h5>$${item.price}</h5>
-//                 <span class="remove-item" data-id=${item.id}>remove</span>
-//             </div>
-//             <div>
-//                 <i class="fas fa-chevron-up" data-id=${item.id}></i>
-//                 <p class="item-amout">${item.amount}</p>
-//                 <i class="fas fa-chevron-down" data-id=${item.id}></i>
-//             </div>
-//         `;
-//     cartContent.appendChild(div);
-//   }
-//   showCart() {
-//     cartOverlay.classList.add('transparentBcg');
-//     cartDOM.classList.add('showCart');
-//   }
-//   hideCart() {
-//     cartOverlay.classList.remove('transparentBcg');
-//     cartDOM.classList.remove('showCart');
-//   }
-//   setupAPP() {
-//     cart = Storage.getCart();
-//     this.setCartValues(cart);
-//     this.populateCart(cart);
-//     cartBtn.addEventListener('click', this.showCart);
-//     closeCartBtn.addEventListener('click', this.hideCart);
-//   }
-//   populateCart(cart) {
-//     cart.forEach(item => this.addCartItem(item));
-//   }
+});
 
-//   clearCart() {
-//     let cartItems = cart.map(item => item.id);
-//     cartItems.forEach(id => this.removeItem(id));
-//     console.log(cartContent.children);
-//     while (cartContent.children.length > 0) {
-//       cartContent.removeChild(cartContent.children[0]);
-//     }
-//     this.hideCart();
-//   }
-//   removeItem(id) {
-//     cart = cart.filter(item => item.id !== id);
-//     this.setCartValues(cart);
-//     Storage.saveCart(cart);
-//     let button = this.getSingleButton(id);
-//     button.disabled = false;
-//     button.innerHTML = `<i class="fas fa-shopping-cart"></i> add to cart`;
-//   }
-//   getSingleButton(id) {
-//     return buttonsDOM.find(button => button.dataset.id === id);
-//   }
-// }
 
-// class Storage {
-//   static saveProducts(products) {
-//     localStorage.setItem('products', JSON.stringify(products));
-//   }
-//   static getProduct(id) {
-//     let products = JSON.parse(localStorage.getItem('products'));
-//     return products.find(product => product.id === id);
-//   }
-//   static saveCart(cart) {
-//     localStorage.setItem('cart', JSON.stringify(cart));
-//   }
-//   static getCart() {
-//     return (localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [];
-//   }
-// }
+//CAROUSEL
+var slideIndex = 1;
+showSlides(slideIndex);
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   const ui = new UI();
-//   const products = new Products();
-//   ui.setupAPP();
-//   products.getProducts().
-//     then(products => {
-//       ui.displayProducts(products)
-//       Storage.saveProducts(products);
-//     }).
-//     then(() => {
-//       ui.getBagButtons();
-//       ui.cartLogic();
-//     });
+// Next/previous controls
+function plusSlides(n) {
+  showSlides((slideIndex += n));
+}
 
-// });
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides((slideIndex = n));
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+
+  slides[slideIndex - 1].style.display = "block";
+}
