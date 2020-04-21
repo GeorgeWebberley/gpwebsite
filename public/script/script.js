@@ -94,8 +94,8 @@ function addCartItem(item) {
         <div>
 
           <span class="qty qty-sub" data-id=${item.id}>-</span>
-                  ${item.amount}
-                  <span class="qty qty-sub" data-id=${item.id} >+</span>
+          ${item.amount}
+          <span class="qty qty-add" data-id=${item.id} >+</span>
 
         </div>
       </div>
@@ -116,9 +116,9 @@ function cartLogic() {
       let addAmount = event.target;
       let id = addAmount.dataset.id;
       let tempItem = cart.find(item => item.id === id);
-      tempItem.amount = tempItem.amount + 1;
+      tempItem.amount += 1;
       Storage.saveCart(cart);
-      this.setCartValues(cart);
+
       addAmount.nextElementSibling.innerText = tempItem.amount;
     } else if (event.target.classList.contains("qty-sub")) {
       let lowerAmount = event.target;
@@ -127,10 +127,10 @@ function cartLogic() {
       tempItem.amount = tempItem.amount - 1;
       if (tempItem.amount > 0) {
         Storage.saveCart(cart);
-        this.setCartValues(cart);
         lowerAmount.previousElementSibling.innerText = tempItem.amount;
       } else {
-        cartContent.removeChild(lowerAmount.parentElement.parentElement);
+        console.log(lowerAmount.parentElement.parentElement.parentElement)
+        cartContent.removeChild(lowerAmount.parentElement.parentElement.parentElement.parentElement);
         this.removeItem(id);
       }
     }
@@ -146,16 +146,16 @@ function removeItem(id) {
   button.innerHTML = `<i class="fas fa-shopping-cart"></i> ADD TO BASKET`;
 }
 
-function setCartValues(cart) {
-  let tempTotal = 0;
-  let itemsTotal = 0;
-  cart.map(item => {
-    tempTotal += item.price * item.amount;
-    itemsTotal += item.amount;
-  });
-  cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
-  cartItems.innerText = itemsTotal;
-}
+// function setCartValues(cart) {
+//   let tempTotal = 0;
+//   let itemsTotal = 0;
+//   cart.map(item => {
+//     tempTotal += item.price * item.amount;
+//     itemsTotal += item.amount;
+//   });
+//   cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
+//   cartItems.innerText = itemsTotal;
+// }
 
 
 document.addEventListener('DOMContentLoaded', () => {
