@@ -1,21 +1,36 @@
+const buttons = [...document.querySelectorAll(".item-btn")];
+buttonsDOM = buttons;
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    const name = button.dataset.name;
+    const price = button.dataset.price;
+    const imageName = button.dataset.image;
+    console.log(item);
+  });
+});
+
 var slideIndex = 1;
 showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+  showSlides((slideIndex += n));
 }
 
 // Thumbnail image controls
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+  showSlides((slideIndex = n));
 }
 
 function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
-  if (n > slides.length) { slideIndex = 1 }
-  if (n < 1) { slideIndex = slides.length }
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
@@ -36,33 +51,25 @@ const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
 const productsDOM = document.querySelector(".products-center");
 
+cartBtn.addEventListener("click", () => {
+  cartOverlay.classList.add("transparentBackground");
+  cartDOM.classList.add("showCart");
+});
 
-
-
-cartBtn.addEventListener('click', () => {
-  cartOverlay.classList.add('transparentBackground');
-  cartDOM.classList.add('showCart');
-})
-
-closeCartBtn.addEventListener('click', () => {
-  cartOverlay.classList.remove('transparentBackground');
-  cartDOM.classList.remove('showCart');
-
-})
-
-
+closeCartBtn.addEventListener("click", () => {
+  cartOverlay.classList.remove("transparentBackground");
+  cartDOM.classList.remove("showCart");
+});
 
 // cartOverlay.addEventListener('click', () => {
 //   cartOverlay.classList.remove('transparentBcg');
 //   cartDOM.classList.remove('showCart');
 // })
 
-
-
 function addCartItem(item) {
-  const div = document.createElement('div');
-  div.classList.add('cart-product');
-  div.innerHTML = ` 
+  const div = document.createElement("div");
+  div.classList.add("cart-product");
+  div.innerHTML = `
     <div class="product-image-wrapper">
       <img src="${item.image}" alt="image of a ring" />
     </div>
@@ -72,11 +79,11 @@ function addCartItem(item) {
         <div>size</div>
         <div class="remove-item" data-id=${item.id}>remove</div>
         <div>
-        
+
           <span class="qty qty-sub" data-id=${item.id}>-</span>
                   ${item.amount}
                   <span class="qty qty-sub" data-id=${item.id} >+</span>
-                   
+
         </div>
       </div>
       <div class="product-price">£${item.price}</div>
@@ -86,24 +93,28 @@ function addCartItem(item) {
   cartContent.appendChild(div);
 }
 
-addBtn.addEventListener('click', () => {
+addBtn.addEventListener("click", () => {
   console.log("here");
-  addCartItem({ image: "images/Cart-example.png", title: "Plain Ring", id: 2, amount: 3, id: 4, id: 5, price: 150 });
-
-
-})
-
+  addCartItem({
+    image: "images/Cart-example.png",
+    title: "Plain Ring",
+    id: 2,
+    amount: 3,
+    id: 4,
+    id: 5,
+    price: 150
+  });
+});
 
 function cartLogic() {
-  clearCartBtn.addEventListener('click', () => this.clearCart());
-  cartContent.addEventListener('click', event => {
-    if (event.target.classList.contains('remove-item')) {
+  clearCartBtn.addEventListener("click", () => this.clearCart());
+  cartContent.addEventListener("click", event => {
+    if (event.target.classList.contains("remove-item")) {
       let removeItem = event.target;
       let id = removeItem.dataset.id;
       cartContent.removeChild(removeItem.parentElement.parentElement);
       this.removeItem(id);
-    }
-    else if (event.target.classList.contains('qty-add')) {
+    } else if (event.target.classList.contains("qty-add")) {
       let addAmount = event.target;
       let id = addAmount.dataset.id;
       let tempItem = cart.find(item => item.id === id);
@@ -111,8 +122,7 @@ function cartLogic() {
       Storage.saveCart(cart);
       this.setCartValues(cart);
       addAmount.nextElementSibling.innerText = tempItem.amount;
-    }
-    else if (event.target.classList.contains('qty-sub')) {
+    } else if (event.target.classList.contains("qty-sub")) {
       let lowerAmount = event.target;
       let id = lowerAmount.dataset.id;
       let tempItem = cart.find(item => item.id === id);
@@ -121,16 +131,13 @@ function cartLogic() {
         Storage.saveCart(cart);
         this.setCartValues(cart);
         lowerAmount.previousElementSibling.innerText = tempItem.amount;
-      }
-      else {
+      } else {
         cartContent.removeChild(lowerAmount.parentElement.parentElement);
         this.removeItem(id);
       }
     }
   });
 }
-
-
 
 // const cartBtn = document.querySelector('.cart-btn');
 // const closeCartBtn = document.querySelector('.close-cart');
@@ -142,7 +149,6 @@ function cartLogic() {
 // const cartContent = document.querySelector('.cart-content');
 // const productsDOM = document.querySelector('.products-center');
 // const btns = document.querySelectorAll('.bag-btn');
-
 
 // let cart = [];
 // let buttonsDOM = [];
@@ -187,7 +193,7 @@ function cartLogic() {
 //                 </div>
 //                 <h3>${product.title}</h3>
 //                 <h4>$${product.price}</h4>
-//             </article> 
+//             </article>
 //             `;
 //     });
 //     productsDOM.innerHTML = result;
