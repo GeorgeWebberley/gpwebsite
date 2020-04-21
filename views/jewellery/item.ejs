@@ -1,9 +1,9 @@
-<h1 class="item-title"><%=item.name%></h1>
+<h1 class="jewellery-list-title"><%=item.name%></h1>
 <section class="item-page-details">
   <div class="item-page-image">
     <img src="/db_images/<%= item.imageName %>" alt="image of <%= item.name %>">
   </div>
-  <div class="price-description">
+  <div class="details">
     <div class="item-description">
       <%= item.description%>
     </div>
@@ -12,6 +12,7 @@
     </div>
   </div>
 </section>
+<!-- MORE ITEMS -->
 <section class="more-items">
   <h2>View similar products</h2>
   <div class="jewellery-list">
