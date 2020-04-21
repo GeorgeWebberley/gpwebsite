@@ -1,13 +1,46 @@
+let cart = [];
+let buttonsDOM = [];
+
 const buttons = [...document.querySelectorAll(".item-btn")];
 buttonsDOM = buttons;
 buttons.forEach(button => {
+
+  let id = button.dataset.id;
+  let inCart = cart.find(item => item.id === id);
+  console.log(inCart);
+
+  if (inCart) {
+    button.innerText = 'In Cart';
+    button.disabled = true;
+  }
   button.addEventListener("click", () => {
     const name = button.dataset.name;
     const price = button.dataset.price;
     const imageName = button.dataset.image;
-    console.log(item);
+    const id = button.dataset.id;
+    const product = { id: id, name: name, price: price, image: imageName, };
+
+
+    Storage.saveCart(product);
+    console.log(Storage.getCart());
+
+
   });
 });
+
+
+
+class Storage {
+
+  static saveCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+  static getCart() {
+    return (localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [];
+  }
+}
+
+
 
 var slideIndex = 1;
 showSlides(slideIndex);
