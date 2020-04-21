@@ -24,7 +24,7 @@ router.get("/:type", async (req, res) => {
   }
 });
 
-router.post("/:type/:id", async (req, res) => {
+router.get("/:type/:id", async (req, res) => {
   try {
     const db = await sqlite.open("./db.sqlite");
     const item = await db.get(

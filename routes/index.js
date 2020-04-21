@@ -36,7 +36,9 @@ router.get("/admin", (req, res) => {
 router.post("/admin", upload.single("image"), async (req, res) => {
   try {
     const db = await sqlite.open("./db.sqlite");
+    // Set the id to null so that it will auto-increment
     await db.run(`insert into jewellery values (
+      NULL,
       "${req.body.name}",
       "${req.body.type}",
       ${req.body.price},

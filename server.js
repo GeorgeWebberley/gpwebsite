@@ -36,6 +36,7 @@ async function create() {
     const db = await sqlite.open("./db.sqlite");
     const jewelleryTable = `
       CREATE TABLE IF NOT EXISTS jewellery (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         name VARCHAR(255),
         type VARCHAR(255),
         price REAL,
