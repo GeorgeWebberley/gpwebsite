@@ -1,3 +1,5 @@
+console.log("running");
+
 var slideIndex = 1;
 showSlides(slideIndex);
 
@@ -53,7 +55,7 @@ closeCartBtn.addEventListener('click', () => {
 
 
 // cartOverlay.addEventListener('click', () => {
-//   cartOverlay.classList.remove('transparentBcg');
+//   cartOverlay.classList.remove('transparentBackground');
 //   cartDOM.classList.remove('showCart');
 // })
 
@@ -87,21 +89,16 @@ function addCartItem(item) {
 }
 
 addBtn.addEventListener('click', () => {
-  console.log("here");
   addCartItem({ image: "images/Cart-example.png", title: "Plain Ring", id: 2, amount: 3, id: 4, id: 5, price: 150 });
-
-
 })
 
 
 function cartLogic() {
-  clearCartBtn.addEventListener('click', () => this.clearCart());
   cartContent.addEventListener('click', event => {
     if (event.target.classList.contains('remove-item')) {
+      console.log(event.target);
       let removeItem = event.target;
-      let id = removeItem.dataset.id;
-      cartContent.removeChild(removeItem.parentElement.parentElement);
-      this.removeItem(id);
+      cartContent.removeChild(removeItem.parentElement.parentElement.parentElement);
     }
     else if (event.target.classList.contains('qty-add')) {
       let addAmount = event.target;
@@ -130,18 +127,8 @@ function cartLogic() {
   });
 }
 
+cartLogic()
 
-
-// const cartBtn = document.querySelector('.cart-btn');
-// const closeCartBtn = document.querySelector('.close-cart');
-// const clearCartBtn = document.querySelector('.clear-cart');
-// const cartDOM = document.querySelector('.cart');
-// const cartOverlay = document.querySelector('.cart-overlay');
-// const cartItems = document.querySelector('.cart-items');
-// const cartTotal = document.querySelector('.cart-total');
-// const cartContent = document.querySelector('.cart-content');
-// const productsDOM = document.querySelector('.products-center');
-// const btns = document.querySelectorAll('.bag-btn');
 
 
 // let cart = [];

@@ -41,7 +41,7 @@ body {
   position:relative;
   align-items: center;
   justify-content: center;
-
+  cursor:pointer;
 }
 
 .cart-icon{
@@ -97,6 +97,7 @@ body {
   }
 }
 
+
 .close-cart {
   font-size: 1.7rem;
   cursor: pointer;
@@ -139,6 +140,14 @@ display: block;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.remove-item{
+  cursor:pointer;
+}
+
+.qty{
+  cursor: pointer;
 }
 
 .product-price{
