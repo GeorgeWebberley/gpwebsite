@@ -21,22 +21,51 @@ body {
   font-family: "Raleway", sans-serif;
   position: sticky;
   top: 0;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   height: 40px;
   width: 100%;
-  color: blue;
-  background-color:rgb(247,247,247);
+  background-color: rgb(230, 230, 230);
   z-index: 1;
 }
 /* start here */
-.menu {
+.menu-center {
   display: flex;
-  justify-content: flex-end;
-  position: relative;
-  right: 5%;
+  justify-content: space-between;
+  width: 100vw;
+  max-width: 1170px;
+}
+
+.site-icon {
+  color: rgb(80, 80, 80);
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+}
+
+.navbar-link {
+  line-height: 40px;
+  margin: 0 1rem;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  height: 100%;
+  background-color: transparent;
+  text-decoration: none;
+  color: rgb(120, 120, 120);
+}
+
+.navbar-link:hover {
+  color: white;
+  background-color: rgba(120, 120, 120);
 }
 
 .cart-btn {
+  margin-left: 1rem;
+  width: 50px;
+  height: 100%;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -47,14 +76,13 @@ body {
   color: black;
   position: absolute;
   font-size: 150%;
-  top: 70%;
-  left: 100%;
   /* bring your own prefixes */
-  transform: translate(-25%, -75%);
 }
 .cart-items {
   position: absolute;
   color: white;
+  top: 20%;
+  right: 70%;
 }
 
 .cart-overlay {
@@ -147,21 +175,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.button {
-  cursor: pointer;
-  transition-duration: 0.4s;
-  border: 0px;
-  margin: 0px;
-  float: right;
-  height: 20px;
-  background-color: transparent;
-}
-
-.button:hover {
-  color: blue;
-  background-color: rgba(230, 230, 230, 0.8);
 }
 
 .landing {
@@ -491,4 +504,23 @@ li {
 .more-items {
   font-family: "Raleway", sans-serif;
   margin: 1rem;
+}
+
+/* ABOUT PAGE */
+
+.about-title {
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+}
+
+.about-image {
+  display: block;
+  margin: auto;
+  width: 50%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.about-text {
+  margin: 2rem;
 }

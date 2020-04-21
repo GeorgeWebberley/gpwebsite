@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/about", (req, res) => {
-  res.send("About");
+  res.render("about");
 });
 
 router.get("/admin", (req, res) => {
