@@ -1,28 +1,25 @@
 <section class="jewellery-list-container">
+  <link rel="script" href="public/script/script.js" />
   <div class="jewellery-list-title">
     <h1>All <%= type %>s</h1>
   </div>
   <div class="jewellery-list">
     <% jewellery.forEach(item => { %>
-      <article class="product">
-          <div class="img-container">
-            <a href="/<%=item.type%>/<%=item.rowid%>">
-              <img
-                src="/db_images/<%= item.imageName %>"
-                alt="product"
-                class="item-img"
-              />
-            </a>
-            <button class="item-btn">
-            <i class="fas fa-shopping-cart"></i>
-            ADD TO BASKET
-            </button>
-          </div>
-          <div class="item-details-row">
-            <h3 class="item-detail"><%= item.name %></h3>
-            <h3 class="item-detail">£<%= item.price %></h3>
-          </div>
-        </article>
+    <article class="product">
+      <div class="img-container">
+        <a href="/<%=item.type%>/<%=item.rowid%>">
+          <img src="/db_images/<%= item.imageName %>" alt="product" class="item-img" />
+        </a>
+        <button class="item-btn">
+          <i class="fas fa-shopping-cart"></i>
+          ADD TO BASKET
+        </button>
+      </div>
+      <div class="item-details-row">
+        <h3 class="item-detail"><%= item.name %></h3>
+        <h3 class="item-detail">£<%= item.price %></h3>
+      </div>
+    </article>
     <% })%>
   </div>
 </section>

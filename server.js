@@ -23,6 +23,7 @@ app.use(expressLayouts);
 // tells express where our public files will be (i.e. in a folder called public)
 app.use(express.static("public"));
 
+
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
 
 const indexRouter = require("./routes/index");

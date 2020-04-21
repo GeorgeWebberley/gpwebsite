@@ -1,41 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>GPWebsite</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    <link rel="script" href="script/script.js"/>
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v5.9.0/js/all.js"
-      integrity="sha384-7Gk1S6elg570RSJJxILsRiq8o0CO99g1zjfOISrqjFUCjxHDn3TmaWoWOqt6eswF"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <div class="content-wrap">
-      <section id="nav-bar">
-        This our website
-        <div class="menu">
-          <a href="admin">
-            <button class="button">Admin</button>
-          </a>
-          <a href="about.html">
-            <button class="button">About Page</button>
-          </a>
-          <a href="about.html">
-            <button class="button">About Page</button>
-          </a>
-          <a href="about.html">
-            <button class="button">About Page</button>
-          </a>
-          <a href="about.html">
-            <button class="button">About Page</button>
-          </a>
-        </div>
-      </section>
 
-      <%- body %>
+<head>
+  <title>GPWebsite</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <link rel="script" href="script/script.js" />
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/cba779aa10.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="content-wrap">
+    <section id="nav-bar">
+      This our website
+      <div class="menu">
+        <button class="add-item">add item</button>
+        <a href="about.html">
+          <button class="button">About Page</button>
+        </a>
+        <a href="about.html">
+          <button class="button">About Page</button>
+        </a>
+        <a href="about.html">
+          <button class="button">About Page</button>
+        </a>
+        <a href="about.html">
+          <button class="button">About Page</button>
+        </a>
+        <a href="about.html">
+          <button class="button">About Page</button>
+        </a>
+        <div class="cart-btn">
+
+          <span class="cart-icon">
+            <i class="fas fa-shopping-bag"></i>
+          </span>
+          <div class="cart-items">0</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!--Start of Cart-->
+    <div class="cart-overlay">
+      <div class="cart">
+        <span class="close-cart">
+          <i class="fas fa-window-close"></i>
+        </span>
+        <h2>my cart</h2>
+        <div class="cart-content">
+
+        </div>
+
+
+      </div>
+    </div>
+    <%- body %>
 
     <!-- <div class="slideshow-container">
       <div class="mySlides fade">
@@ -98,20 +119,21 @@
       </div>
     </div> -->
   </div>
-<footer class="footer">
-  <ul class="footerList">
-    <li>About</li>
-    <li>FAQ</li>
-    <li>Contact us</li>
-    <li>Delivery</li>
-    <li>Terms and Conditions</li>
-    <li>Privacy and Cookie Policy</li>
-    <li>Accessibility</li>
-  </ul>
-</footer>
+  <footer class="footer">
+    <ul class="footerList">
+      <li>About</li>
+      <li>FAQ</li>
+      <li>Contact us</li>
+      <li>Delivery</li>
+      <li>Terms and Conditions</li>
+      <li>Privacy and Cookie Policy</li>
+      <li>Accessibility</li>
+    </ul>
+  </footer>
 
-    <script src="script.js" type="javascript"></script>
 
-    <script src="script/script.js"></script>
-  </body>
+
+  <script src="script/script.js"></script>
+</body>
+
 </html>
