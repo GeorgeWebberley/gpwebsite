@@ -461,26 +461,34 @@ li {
   margin: 0;
 }
 
+/* ------ITEM PAGE------ */
 .item-page-details {
-  display: grid;
-  justify-items: flex-start;
-  align-items: start;
-  align-content: flex-start;
-  grid-template-areas: "image image details";
-  grid-gap: 0.5rem;
-  margin-top: 0.5rem;
+  margin: auto;
+  display: flex;
+  font-family: "Raleway", sans-serif;
+  max-width: 1170px;
+  align-items: center;
 }
 
 .item-page-image {
-  grid-area: "image";
+  margin: 1rem;
 }
 
 .details {
-  grid-area: "details";
+  margin: 1rem;
+  width: 60%;
 }
 
 .item-description {
+  margin-bottom: 4rem;
 }
 
 .item-price {
+  font-size: 2rem;
+  margin: 1rem;
+}
+
+.more-items {
+  font-family: "Raleway", sans-serif;
+  margin: 1rem;
 }
