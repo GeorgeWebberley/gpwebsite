@@ -1,3 +1,4 @@
+"use strict";
 const express = require("express");
 
 // get the router method from express
