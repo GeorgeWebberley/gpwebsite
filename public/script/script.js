@@ -10,44 +10,40 @@ const cartContent = document.querySelector(".cart-content");
 const productsDOM = document.querySelector(".products-center");
 
 let cart = [];
-let buttonsDOM = [];
-
-const buttons = [...document.querySelectorAll(".item-btn")];
-buttonsDOM = buttons;
-buttons.forEach(button => {
-
-  let id = button.dataset.id;
-  let inCart = cart.find(item => item.id === id);
-
-  console.log(inCart);
-
-  if (inCart) {
-    button.innerText = 'In Cart';
-    button.disabled = true;
-  }
-  button.addEventListener("click", (event) => {
-    event.target.innerText = 'In Cart';
-    event.target.disabled = true;
+let add2CartButtons = [];
 
 
-    let name = button.dataset.name;
-    let price = button.dataset.price;
-    let imageName = button.dataset.image;
+
+function add2Cart() {
+  const buttons = [...document.querySelectorAll(".item-btn")];
+  add2CartButtons = buttons;
+  buttons.forEach(button => {
+
     let id = button.dataset.id;
-    let product = { id: id, name: name, price: price, image: imageName, };
-    cart = [...cart, product];
-    Storage.saveCart(cart);
-    addCartItem(product);
-    showCart();
+    let inCart = cart.find(item => item.id === id);
 
-    console.log(cart);
+    if (inCart) {
+      button.innerText = 'In Cart';
+      button.disabled = true;
+    }
 
+    button.addEventListener("click", (event) => {
+      event.target.innerText = 'In Cart';
+      event.target.disabled = true;
 
+      let name = button.dataset.name;
+      let price = button.dataset.price;
+      let imageName = button.dataset.image;
+      let id = button.dataset.id;
+      let product = { id: id, name: name, price: price, image: imageName, };
+      cart = [...cart, product];
+      Storage.saveCart(cart);
+      addCartItem(product);
+      showCart();
 
+    });
   });
-});
-
-
+}
 
 class Storage {
 
@@ -59,20 +55,15 @@ class Storage {
   }
 }
 
-
-
-
 //SHOPPING CART//
 //variables
-
-
 
 cartBtn.addEventListener("click", () => {
   showCart();
 })
 
 closeCartBtn.addEventListener("click", () => {
-  removeCart();
+  hideCart();
 })
 
 function showCart() {
@@ -80,7 +71,7 @@ function showCart() {
   cartDOM.classList.add("showCart");
 }
 
-function removeCart() {
+function hideCart() {
   cartOverlay.classList.remove("transparentBackground");
   cartDOM.classList.remove("showCart");
 }
@@ -98,8 +89,7 @@ function addCartItem(item) {
     </div>
     <div class="product-info-wrapper">
       <div class="product-info">
-        <div>${item.title}</div>
-        <div>size</div>
+        <div>${item.name}</div>
         <div class="remove-item" data-id=${item.id}>remove</div>
         <div>
 
@@ -116,27 +106,12 @@ function addCartItem(item) {
   cartContent.appendChild(div);
 }
 
-addBtn.addEventListener("click", () => {
-  console.log("here");
-  addCartItem({
-    image: "images/Cart-example.png",
-    title: "Plain Ring",
-    id: 2,
-    amount: 3,
-    id: 4,
-    id: 5,
-    price: 150
-  });
-});
-
 function cartLogic() {
-  clearCartBtn.addEventListener("click", () => this.clearCart());
   cartContent.addEventListener("click", event => {
     if (event.target.classList.contains("remove-item")) {
-      let removeItem = event.target;
-      let id = removeItem.dataset.id;
-      cartContent.removeChild(removeItem.parentElement.parentElement);
-      this.removeItem(id);
+      cartContent.removeChild(event.target.parentElement.parentElement.parentElement);
+      removeItem(event.target.dataset.id);
+
     } else if (event.target.classList.contains("qty-add")) {
       let addAmount = event.target;
       let id = addAmount.dataset.id;
@@ -162,22 +137,25 @@ function cartLogic() {
   });
 }
 
-cartLogic();
+function removeItem(id) {
+  cart = cart.filter(item => item.id !== id);
+  // this.setCartValues(cart);
+  Storage.saveCart(cart);
+  let button = add2CartButtons.find(button => button.dataset.id === id)
+  button.disabled = false;
+  button.innerHTML = `<i class="fas fa-shopping-cart"></i> ADD TO BASKET`;
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  setupAPP();
-  products.getProducts().
-    then(products => {
-      ui.displayProducts(products)
-      Storage.saveProducts(products);
-    }).
-    then(() => {
-      ui.getBagButtons();
-      ui.cartLogic();
-    });
+  cart = Storage.getCart();
+  console.log(cart);
+  add2Cart();
+  cart.forEach(item => this.addCartItem(item));
+  cartLogic();
 
-});
+})
 
 
 //CAROUSEL
