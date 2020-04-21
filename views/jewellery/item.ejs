@@ -1,17 +1,20 @@
 <h1 class="jewellery-list-title"><%=item.name%></h1>
 <section class="item-page-details">
-  <div class="item-page-image">
-    <img src="/db_images/<%= item.imageName %>" alt="image of <%= item.name %>">
-  </div>
-  <div class="details">
-    <div class="item-description">
-      <%= item.description%>
+    <img class="item-page-image" src="/db_images/<%= item.imageName %>" alt="image of <%= item.name %>">
+    <div class="details">
+      <div class="item-description">
+        <%= item.description%>
+      </div>
+      <!-- ADD TO BASKET FORM -->
+      <span class="item-price">
+        £<%= item.price %>
+      </span>
+      <button class="btn btn-primary" type="button" name="button">Add to basket</button>
     </div>
-    <div class="item-price">
-      <%= item.price %>
-    </div>
-  </div>
 </section>
+<div class="bar">
+
+</div>
 <!-- MORE ITEMS -->
 <section class="more-items">
   <h2>View similar products</h2>
