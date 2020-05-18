@@ -1,17 +1,9 @@
 const cartBtn = document.querySelector(".cart-btn");
 const addBtn = document.querySelector(".add-item");
 const closeCartBtn = document.querySelector(".close-cart");
-const clearCartBtn = document.querySelector(".clear-cart");
-const cartDOM = document.querySelector(".cart");
-const cartOverlay = document.querySelector(".cart-overlay");
-const cartItems = document.querySelector(".cart-items");
-const cartTotal = document.querySelector(".cart-total");
-const cartContent = document.querySelector(".cart-content");
-const productsDOM = document.querySelector(".products-center");
 
 let cart = [];
 let add2CartButtons = [];
-
 
 
 function add2Cart() {
@@ -35,7 +27,7 @@ function add2Cart() {
       let price = button.dataset.price;
       let imageName = button.dataset.image;
       let id = button.dataset.id;
-      let product = { id: id, name: name, price: price, image: imageName, amount: 1 };
+      let product = { id: id, name: name, price: price, image: imageName, amount: 1, amountid: id };
       cart = [...cart, product];
       Storage.saveCart(cart);
       addCartItem(product);
@@ -75,10 +67,7 @@ function hideCart() {
   cartOverlay.classList.remove("transparentBackground");
   cartDOM.classList.remove("showCart");
 }
-// cartOverlay.addEventListener('click', () => {
-//   cartOverlay.classList.remove('transparentBackground');
-//   cartDOM.classList.remove('showCart');
-// })
+
 
 function addCartItem(item) {
   const div = document.createElement("div");
@@ -94,7 +83,7 @@ function addCartItem(item) {
         <div>
 
           <span class="qty qty-sub" data-id=${item.id}>-</span>
-          ${item.amount}
+          <div class="item-amount" data-id=${item.amountid}>${item.amount}<div>
           <span class="qty qty-add" data-id=${item.id} >+</span>
 
         </div>
@@ -108,54 +97,21 @@ function addCartItem(item) {
 
 function cartLogic() {
   cartContent.addEventListener("click", event => {
+
     if (event.target.classList.contains("remove-item")) {
       cartContent.removeChild(event.target.parentElement.parentElement.parentElement);
-      removeItem(event.target.dataset.id);
-
-    } else if (event.target.classList.contains("qty-add")) {
-      let addAmount = event.target;
-      let id = addAmount.dataset.id;
-      let tempItem = cart.find(item => item.id === id);
-      tempItem.amount += 1;
-      Storage.saveCart(cart);
-
-      addAmount.nextElementSibling.innerText = tempItem.amount;
-    } else if (event.target.classList.contains("qty-sub")) {
-      let lowerAmount = event.target;
-      let id = lowerAmount.dataset.id;
-      let tempItem = cart.find(item => item.id === id);
-      tempItem.amount = tempItem.amount - 1;
-      if (tempItem.amount > 0) {
-        Storage.saveCart(cart);
-        lowerAmount.previousElementSibling.innerText = tempItem.amount;
-      } else {
-        console.log(lowerAmount.parentElement.parentElement.parentElement)
-        cartContent.removeChild(lowerAmount.parentElement.parentElement.parentElement.parentElement);
-        this.removeItem(id);
-      }
+      removeItem(event.target.dataset.id)
     }
-  });
+  }
 }
 
 function removeItem(id) {
   cart = cart.filter(item => item.id !== id);
-  // this.setCartValues(cart);
   Storage.saveCart(cart);
   let button = add2CartButtons.find(button => button.dataset.id === id);
   button.disabled = false;
   button.innerHTML = `<i class="fas fa-shopping-cart"></i> ADD TO BASKET`;
 }
-
-// function setCartValues(cart) {
-//   let tempTotal = 0;
-//   let itemsTotal = 0;
-//   cart.map(item => {
-//     tempTotal += item.price * item.amount;
-//     itemsTotal += item.amount;
-//   });
-//   cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
-//   cartItems.innerText = itemsTotal;
-// }
 
 
 document.addEventListener('DOMContentLoaded', () => {
