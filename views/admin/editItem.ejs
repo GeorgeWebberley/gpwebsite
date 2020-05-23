@@ -1,0 +1,33 @@
+<h1 class="jewellery-list-title"><%=item.name%></h1>
+<section class="admin-form-container">
+  <div class="admin-form">
+    <form  action="/admin/editItem/<%= item.id %>?_method=PUT" method="post" enctype="multipart/form-data">
+      <div class="form-grid">
+        <label>Jewellery Name</label>
+        <input required type="text" name="name" value="<%= item.name %>">
+        <label>Jewellery Type</label>
+        <select required name="type">
+          <% let options = [ "earring", "necklace", "ring", "bracelet"]; %>
+          <% options.forEach(option => { %>
+            <% let selected = ( item.type == option ) ? "selected" : ""; %>
+            <option value="<%= option %>" <%= selected %>><%= option %></option>
+          <% }) %>
+        </select>
+        <label>Price</label>
+         <section>
+           <span class="pound">£</span>
+           <input required type="number" name="price" step="any" value="<%= item.price %>">
+         </section>
+        <label>Image</label>
+        <input type="file" name="image">
+        <label>Description</label>
+        <textarea required class="edit-text-area" name="description"><%= item.description %></textarea>
+      </div>
+      <div class="btn-row">
+        <!-- links are used for cancel, buttons used for form submits -->
+        <a class="btn btn-danger" href="/admin/removeItem">Cancel</a>
+        <button class="btn btn-primary" type="submit" name="button">Save</button>
+      </div>
+    </form>
+  </div>
+</section>
