@@ -1,6 +1,14 @@
 const cartBtn = document.querySelector(".cart-btn");
 const addBtn = document.querySelector(".add-item");
 const closeCartBtn = document.querySelector(".close-cart");
+const clearCartBtn = document.querySelector(".clear-cart");
+const cartDOM = document.querySelector(".cart");
+const cartOverlay = document.querySelector(".cart-overlay");
+const cartItems = document.querySelector(".cart-items");
+const cartTotal = document.querySelector(".cart-total");
+const cartContent = document.querySelector(".cart-content");
+const amount = document.querySelector(".item-amount");
+
 
 let cart = [];
 let add2CartButtons = [];
@@ -87,7 +95,7 @@ function addCartItem(item) {
         <div>
 
           <span class="qty qty-sub" data-id=${item.id}>-</span>
-          <div class="item-amount" data-id=${item.amountid}>${item.amount}<div>
+          <p class="item-amount" data-id=${item.amountid}>${item.amount}</p>
           <span class="qty qty-add" data-id=${item.id} >+</span>
 
         </div>
@@ -99,16 +107,71 @@ function addCartItem(item) {
   cartContent.appendChild(div);
 }
 
-function cartLogic() {
+function cartController() {
   cartContent.addEventListener("click", event => {
     if (event.target.classList.contains("remove-item")) {
+<<<<<<< HEAD
       cartContent.removeChild(
         event.target.parentElement.parentElement.parentElement
       );
       removeItem(event.target.dataset.id);
+=======
+      cartContent.removeChild(event.target.parentElement.parentElement.parentElement);
+      removeItem(event.target.dataset.id)
+
+    } else if (event.target.classList.contains("qty-add")) {
+      let addAmount = event.target;
+      let id = addAmount.dataset.id;
+      let tempItem = cart.find(item => item.id === id);
+      tempItem.amount += 1;
+      Storage.saveCart(cart);
+      console.log(addAmount.previousElementSibling)
+      addAmount.previousElementSibling.innerText = tempItem.amount;
+      // const div = document.getElementById(id);
+      // console.log(div, id, tempItem.amount)
+      // div.innerHTML = tempItem.amount;
+
+    } else if (event.target.classList.contains("qty-sub")) {
+      let lowerAmount = event.target;
+      let id = lowerAmount.dataset.id;
+      let tempItem = cart.find(item => item.id === id);
+
+      tempItem.amount -= 1;
+      if (tempItem.amount > 0) {
+        Storage.saveCart(cart);
+        console.log(lowerAmount.nextElementSibling)
+        lowerAmount.nextElementSibling.innerText = tempItem.amount;
+
+      } else {
+
+        cartContent.removeChild(lowerAmount.parentElement.parentElement.parentElement.parentElement);
+        removeItem(event.target.dataset.id);
+      }
+>>>>>>> d346b17763e3cfbd2153ef531bb2c0fa9b16d3a6
     }
   });
 }
+
+
+
+// function setCartValues(cart) {
+//   let tempTotal = 0;
+//   let itemsTotal = 0;
+//   cart.map(item => {
+//     tempTotal += item.price * item.amount;
+//     itemsTotal += item.amount;
+//   });
+//   cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
+//   cartItems.innerText = itemsTotal;
+// }
+
+
+
+
+// cartOverlay.addEventListener('click', () => {
+//   cartOverlay.classList.remove('transparentBackground');
+//   cartDOM.classList.remove('showCart');
+// })
 
 function removeItem(id) {
   cart = cart.filter(item => item.id !== id);
@@ -123,8 +186,15 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log(cart);
   add2Cart();
   cart.forEach(item => this.addCartItem(item));
+<<<<<<< HEAD
   cartLogic();
 });
+=======
+  cartController();
+
+})
+
+>>>>>>> d346b17763e3cfbd2153ef531bb2c0fa9b16d3a6
 
 //CAROUSEL
 var slideIndex = 1;
