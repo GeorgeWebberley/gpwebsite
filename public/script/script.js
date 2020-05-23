@@ -1,14 +1,15 @@
+const checkoutBtn = document.querySelector(".checkout");
 const cartBtn = document.querySelector(".cart-btn");
 const addBtn = document.querySelector(".add-item");
 const closeCartBtn = document.querySelector(".close-cart");
 const clearCartBtn = document.querySelector(".clear-cart");
 const cartDOM = document.querySelector(".cart");
 const cartOverlay = document.querySelector(".cart-overlay");
-const cartItems = document.querySelector(".cart-items");
-const cartTotal = document.querySelector(".cart-total");
+const numberInCart = document.querySelector(".number-in-cart");
+const Total = document.querySelector(".total");
 const cartContent = document.querySelector(".cart-content");
 const amount = document.querySelector(".item-amount");
-
+const checkoutSummary = document.querySelector(".checkout-summary");
 
 let cart = [];
 let add2CartButtons = [];
@@ -38,7 +39,7 @@ function add2Cart() {
       let product = { id: id, name: name, price: price, image: imageName, amount: 1, amountid: id };
       cart = [...cart, product];
       Storage.saveCart(cart);
-      addCartItem(product);
+      addCartItem(product, cartContent);
       showCart();
 
     });
@@ -77,7 +78,7 @@ function hideCart() {
 }
 
 
-function addCartItem(item) {
+function addCartItem(item, destination) {
   const div = document.createElement("div");
   div.classList.add("cart-product");
   div.innerHTML = `
@@ -86,11 +87,10 @@ function addCartItem(item) {
     </div>
     <div class="product-info-wrapper">
       <div class="product-info">
+     
         <div>${item.name}</div>
-         <span class="remove-item" data-id=${item.id}>
-          <i class="fas fa-window-close"></i>
-        </span>
-        <div class="remove-item" data-id=${item.id}>remove</div>
+       
+        
         <div>
 
           <span class="qty qty-sub" data-id=${item.id}>-</span>
@@ -100,10 +100,12 @@ function addCartItem(item) {
         </div>
       </div>
       <div class="product-price">£${item.price}</div>
+       <div class="remove-item" data-id=${item.id}>x</div>
 
     </div>
 `;
-  cartContent.appendChild(div);
+  destination.appendChild(div);
+  updateCart(cart);
 }
 
 function cartController() {
@@ -111,7 +113,8 @@ function cartController() {
 
     if (event.target.classList.contains("remove-item")) {
       cartContent.removeChild(event.target.parentElement.parentElement.parentElement);
-      removeItem(event.target.dataset.id)
+      removeItem(event.target.dataset.id);
+      updateCart(cart);
 
     } else if (event.target.classList.contains("qty-add")) {
       let addAmount = event.target;
@@ -120,6 +123,7 @@ function cartController() {
       tempItem.amount += 1;
       Storage.saveCart(cart);
       addAmount.previousElementSibling.innerText = tempItem.amount;
+      updateCart(cart);
 
     } else if (event.target.classList.contains("qty-sub")) {
       let lowerAmount = event.target;
@@ -129,18 +133,28 @@ function cartController() {
       tempItem.amount -= 1;
       if (tempItem.amount > 0) {
         Storage.saveCart(cart);
-        console.log(lowerAmount.nextElementSibling)
         lowerAmount.nextElementSibling.innerText = tempItem.amount;
+        updateCart(cart);
 
       } else {
-
         cartContent.removeChild(lowerAmount.parentElement.parentElement.parentElement.parentElement);
         removeItem(event.target.dataset.id);
+        updateCart(cart);
       }
     }
   });
 }
 
+function updateCart(cart) {
+  let tempTotal = 0;
+  let itemsTotal = 0;
+  cart.map(item => {
+    tempTotal += item.price * item.amount;
+    itemsTotal += item.amount;
+  });
+  Total.innerText = parseFloat(tempTotal.toFixed(2));
+  numberInCart.innerText = itemsTotal;
+}
 
 function removeItem(id) {
   cart = cart.filter(item => item.id !== id);
@@ -154,13 +168,16 @@ function removeItem(id) {
 document.addEventListener('DOMContentLoaded', () => {
 
   cart = Storage.getCart();
-  console.log(cart);
   add2Cart();
-  cart.forEach(item => this.addCartItem(item));
+  cart.forEach(item => this.addCartItem(item, cartContent));
+
   cartController();
 
 })
 
+checkoutBtn.addEventListener("click", () => {
+  cart.forEach(item => this.addCartItem(item, checkoutSummary));
+})
 
 //CAROUSEL
 var slideIndex = 1;

@@ -5,6 +5,12 @@ const sqlite = require("sqlite");
 // get the router method from express
 const router = express.Router();
 
+
+router.get("/checkout", (req, res) => {
+  res.render("checkout");
+});
+
+
 router.get("/", (req, res) => {
   res.send("Jewellery");
 });
@@ -43,5 +49,6 @@ router.get("/:type/:id", async (req, res) => {
     res.redirect("/");
   }
 });
+
 
 module.exports = router;

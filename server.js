@@ -84,6 +84,7 @@ const indexRouter = require("./routes/index");
 const jewelleryRouter = require("./routes/jewellery");
 const accountRouter = require("./routes/account");
 
+
 // ---- DATABASE SETUP ----
 async function create() {
   try {
@@ -112,6 +113,7 @@ async function create() {
 app.use("/", indexRouter);
 app.use("/jewellery", jewelleryRouter);
 app.use("/account", accountRouter);
+
 
 // ---- SERVER CONNECT ----
 
