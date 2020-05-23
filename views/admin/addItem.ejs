@@ -1,4 +1,4 @@
-<%- include ("./partials/message.ejs") %>
+<%- include ("../partials/message.ejs") %>
 <section class="admin-form-container">
   <div class="admin-form">
 
@@ -29,11 +29,11 @@
       </div>
       <div class="btn-row">
         <!-- links are used for cancel, buttons used for form submits -->
-        <a class="btn btn-danger" href="/">Cancel</a>
+        <a class="btn btn-danger" href="/admin">Cancel</a>
         <button class="btn btn-primary" type="submit" name="button">Create Item</button>
       </div>
   </form>
-    <form action="/account/logout?_method=DELETE" method="POST">
+    <form action="/admin/logout?_method=DELETE" method="POST">
       <button class="logout login-link" type="submit">Log Out</button>
     </form>
   </div>

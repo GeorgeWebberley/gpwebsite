@@ -1,0 +1,22 @@
+<section class="jewellery-list-container">
+  <div class="jewellery-list-title">
+    <h1>Which item would you like to edit?</h1>
+  </div>
+  <div class="item-list">
+    <% jewellery.forEach(item => { %>
+    <article class="manage-item">
+      <img class="manage-item-image" src="/db_images/<%= item.imageName %>" alt="product" class="item-img" />
+      <h3 class="manage-item-detail"><%= item.name %></h3>
+      <h3 class="manage-item-detail">£<%= item.price %></h3>
+      <a href="/admin/editItem/<%= item.id %>">
+        <i class="edit-icon far fa-edit fa-lg"></i>
+      </a>
+      <form action="/admin/removeItem/<%= item.id %>?_method=DELETE" method="POST">
+        <button class="manage-delete" type="submit" name="button">
+          <i class="delete-icon fas fa-trash fa-2x"></i>
+        </button>
+      </form>
+    </article>
+    <% })%>
+  </div>
+</section>

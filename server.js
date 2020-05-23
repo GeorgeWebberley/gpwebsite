@@ -82,7 +82,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 const indexRouter = require("./routes/index");
 const jewelleryRouter = require("./routes/jewellery");
-const accountRouter = require("./routes/account");
+const adminRouter = require("./routes/admin");
 
 // ---- DATABASE SETUP ----
 async function create() {
@@ -108,10 +108,10 @@ async function create() {
   }
 }
 
-// set the index to be on '/', jewellery on '/jewellery' and account on '/account'
+// set the index to be on '/', jewellery on '/jewellery' and admin on '/admin'
 app.use("/", indexRouter);
 app.use("/jewellery", jewelleryRouter);
-app.use("/account", accountRouter);
+app.use("/admin", adminRouter);
 
 // ---- SERVER CONNECT ----
 
