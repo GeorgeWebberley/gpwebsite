@@ -30,11 +30,11 @@ router.get("/about", (req, res) => {
   res.render("about");
 });
 
-router.get("/admin", (req, res) => {
+router.get("/admin", checkAdmin, (req, res) => {
   res.render("admin");
 });
 
-router.post("/admin", upload.single("image"), async (req, res) => {
+router.post("/admin", checkAdmin, upload.single("image"), async (req, res) => {
   try {
     const db = await sqlite.open("./db.sqlite");
     // Set the id to null so that it will auto-increment
@@ -55,5 +55,12 @@ router.post("/admin", upload.single("image"), async (req, res) => {
     });
   }
 });
+
+function checkAdmin(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/account/login");
+}
 
 module.exports = router;
