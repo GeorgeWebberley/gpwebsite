@@ -1,0 +1,25 @@
+<%- include ("../partials/message.ejs") %>
+<section class="admin-form-container">
+  <form class="admin-form" action="/account/register" method="post">
+    <h1 class="admin-form-title">Add New Item</h1>
+    <div class="bar"></div>
+    <div class="form-grid">
+        <label>Username</label>
+        <input required type="text" name="username" value="<%= typeof username != 'undefined' ? username : '' %>">
+        <label>Password</label>
+        <input required type="password" name="password" value="<%= typeof password != 'undefined' ? password : '' %>">
+        <label>Confirm Password</label>
+        <input required type="password" name="password2" value="<%= typeof password2 != 'undefined' ? password2 : '' %>">
+        <label>Master Password</label>
+        <input required type="password" name="master" value="<%= typeof master != 'undefined' ? master : '' %>">
+      </div>
+      <div class="btn-row">
+        <!-- link used for cancel, button used for form submit -->
+        <a class="btn btn-danger" href="/">Cancel</a>
+        <button class="btn btn-primary" type="submit" name="button">Register</button>
+      </div>
+      <div class="login-link">
+        Already have an account? <a href="/account/login">Login</a>
+      </div>
+  </form>
+</section>

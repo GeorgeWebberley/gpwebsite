@@ -1,10 +1,15 @@
-<% if(locals.successMessage != null) { %>
-  <div class="success message">
-    <%= successMessage %>
-  </div>
+<!-- VALIDATION ERRORS -->
+<% if(typeof errors != "undefined") { %>
+  <% errors.forEach(error => { %>
+    <div class="error message">
+      <%= error.msg %>
+    </div>
+  <% })%>
 <% } %>
-<% if(locals.errorMessage != null) { %>
+
+<!-- PASSPORT ERRORS -->
+<% if (messages.error) { %>
   <div class="error message">
-    <%= errorMessage %>
+    <%= messages.error %>
   </div>
 <% } %>

@@ -524,3 +524,11 @@ li {
 .about-text {
   margin: 2rem;
 }
+
+/* LOGIN/REGISTER PAGE */
+
+.login-link {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 1rem;
+}

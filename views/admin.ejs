@@ -1,6 +1,9 @@
 <%- include ("./partials/message.ejs") %>
 <section class="admin-form-container">
-  <form class="admin-form" action="/admin" method="post" enctype="multipart/form-data">
+  <div class="admin-form">
+
+
+  <form action="/admin" method="post" enctype="multipart/form-data">
     <h1 class="admin-form-title">Add New Item</h1>
     <div class="bar"></div>
     <div class="form-grid">
@@ -30,4 +33,8 @@
         <button class="btn btn-primary" type="submit" name="button">Create Item</button>
       </div>
   </form>
+    <form action="/account/logout?_method=DELETE" method="POST">
+      <button class="logout" type="submit">Log Out</button>
+    </form>
+  </div>
 </section>
