@@ -13,50 +13,45 @@ const amount = document.querySelector(".item-amount");
 let cart = [];
 let add2CartButtons = [];
 
+
 function add2Cart() {
   const buttons = [...document.querySelectorAll(".item-btn")];
   add2CartButtons = buttons;
   buttons.forEach(button => {
+
     let id = button.dataset.id;
     let inCart = cart.find(item => item.id === id);
 
     if (inCart) {
-      button.innerText = "In Cart";
+      button.innerText = 'In Cart';
       button.disabled = true;
     }
 
-    button.addEventListener("click", event => {
-      event.target.innerText = "In Cart";
+    button.addEventListener("click", (event) => {
+      event.target.innerText = 'In Cart';
       event.target.disabled = true;
 
       let name = button.dataset.name;
       let price = button.dataset.price;
       let imageName = button.dataset.image;
       let id = button.dataset.id;
-      let product = {
-        id: id,
-        name: name,
-        price: price,
-        image: imageName,
-        amount: 1,
-        amountid: id
-      };
+      let product = { id: id, name: name, price: price, image: imageName, amount: 1, amountid: id };
       cart = [...cart, product];
       Storage.saveCart(cart);
       addCartItem(product);
       showCart();
+
     });
   });
 }
 
 class Storage {
+
   static saveCart(cart) {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
   static getCart() {
-    return localStorage.getItem("cart")
-      ? JSON.parse(localStorage.getItem("cart"))
-      : [];
+    return (localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [];
   }
 }
 
@@ -65,11 +60,11 @@ class Storage {
 
 cartBtn.addEventListener("click", () => {
   showCart();
-});
+})
 
 closeCartBtn.addEventListener("click", () => {
   hideCart();
-});
+})
 
 function showCart() {
   cartOverlay.classList.add("transparentBackground");
@@ -81,6 +76,7 @@ function hideCart() {
   cartDOM.classList.remove("showCart");
 }
 
+
 function addCartItem(item) {
   const div = document.createElement("div");
   div.classList.add("cart-product");
@@ -91,6 +87,9 @@ function addCartItem(item) {
     <div class="product-info-wrapper">
       <div class="product-info">
         <div>${item.name}</div>
+         <span class="remove-item" data-id=${item.id}>
+          <i class="fas fa-window-close"></i>
+        </span>
         <div class="remove-item" data-id=${item.id}>remove</div>
         <div>
 
@@ -109,13 +108,8 @@ function addCartItem(item) {
 
 function cartController() {
   cartContent.addEventListener("click", event => {
+
     if (event.target.classList.contains("remove-item")) {
-<<<<<<< HEAD
-      cartContent.removeChild(
-        event.target.parentElement.parentElement.parentElement
-      );
-      removeItem(event.target.dataset.id);
-=======
       cartContent.removeChild(event.target.parentElement.parentElement.parentElement);
       removeItem(event.target.dataset.id)
 
@@ -125,11 +119,7 @@ function cartController() {
       let tempItem = cart.find(item => item.id === id);
       tempItem.amount += 1;
       Storage.saveCart(cart);
-      console.log(addAmount.previousElementSibling)
       addAmount.previousElementSibling.innerText = tempItem.amount;
-      // const div = document.getElementById(id);
-      // console.log(div, id, tempItem.amount)
-      // div.innerHTML = tempItem.amount;
 
     } else if (event.target.classList.contains("qty-sub")) {
       let lowerAmount = event.target;
@@ -147,31 +137,10 @@ function cartController() {
         cartContent.removeChild(lowerAmount.parentElement.parentElement.parentElement.parentElement);
         removeItem(event.target.dataset.id);
       }
->>>>>>> d346b17763e3cfbd2153ef531bb2c0fa9b16d3a6
     }
   });
 }
 
-
-
-// function setCartValues(cart) {
-//   let tempTotal = 0;
-//   let itemsTotal = 0;
-//   cart.map(item => {
-//     tempTotal += item.price * item.amount;
-//     itemsTotal += item.amount;
-//   });
-//   cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
-//   cartItems.innerText = itemsTotal;
-// }
-
-
-
-
-// cartOverlay.addEventListener('click', () => {
-//   cartOverlay.classList.remove('transparentBackground');
-//   cartDOM.classList.remove('showCart');
-// })
 
 function removeItem(id) {
   cart = cart.filter(item => item.id !== id);
@@ -181,20 +150,17 @@ function removeItem(id) {
   button.innerHTML = `<i class="fas fa-shopping-cart"></i> ADD TO BASKET`;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+
+document.addEventListener('DOMContentLoaded', () => {
+
   cart = Storage.getCart();
   console.log(cart);
   add2Cart();
   cart.forEach(item => this.addCartItem(item));
-<<<<<<< HEAD
-  cartLogic();
-});
-=======
   cartController();
 
 })
 
->>>>>>> d346b17763e3cfbd2153ef531bb2c0fa9b16d3a6
 
 //CAROUSEL
 var slideIndex = 1;
