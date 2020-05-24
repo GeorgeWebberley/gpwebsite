@@ -76,11 +76,13 @@ router.post("/register", checkNotAdmin, async (req, res) => {
         // Else, we can hash the password and insert new admin into database
         const passwordHash = await bcrypt.hash(password, 10);
         insertAdmin(username, passwordHash);
-        res.redirect("/admin/login");
+        res.render("admin/login", {
+          success: "Account made successfully! You can now login."
+        });
       }
     } catch (e) {
       console.log(e);
-      res.redirect("/register");
+      res.redirect("/admin/register");
     }
   }
 });
@@ -114,7 +116,7 @@ router.post(
       "${req.file.filename}",
       "${req.body.description}")`);
       res.render("admin/addItem", {
-        successMessage: "Success! Item added to database."
+        success: "Success! Item added to database."
       });
     } catch (e) {
       console.log(e);

@@ -10,6 +10,8 @@ const Total = document.querySelector(".total");
 const cartContent = document.querySelector(".cart-content");
 const amount = document.querySelector(".item-amount");
 const checkoutSummary = document.querySelector(".checkout-summary");
+const closeMessage = document.querySelector(".message-close");
+const message = document.querySelector(".message");
 
 let cart = [];
 let add2CartButtons = [];
@@ -179,6 +181,16 @@ document.addEventListener("DOMContentLoaded", () => {
 checkoutBtn.addEventListener("click", () => {
   cart.forEach(item => this.addCartItem(item, checkoutSummary));
 });
+
+if (closeMessage != null) {
+  closeMessage.addEventListener("click", () => {
+    hideMessage();
+  });
+}
+
+function hideMessage() {
+  message.classList.add("hide-message");
+}
 
 //CAROUSEL
 var slideIndex = 1;

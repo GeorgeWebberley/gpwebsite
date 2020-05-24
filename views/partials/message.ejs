@@ -3,13 +3,30 @@
   <% errors.forEach(error => { %>
     <div class="error message">
       <%= error.msg %>
+      <span class="message-close">
+        <i class="fas fa-times"></i>
+      </span>
     </div>
   <% })%>
 <% } %>
+
+<!-- SUCCESS MESSAGES -->
+<% if (typeof success != "undefined") { %>
+  <div class="success message">
+    <%= success %>
+    <span class="message-close">
+      <i class="fas fa-times"></i>
+    </span>
+  </div>
+<% } %>
+
 
 <!-- PASSPORT ERRORS -->
 <% if (messages.error) { %>
   <div class="error message">
     <%= messages.error %>
+    <span class="message-close">
+      <i class="fas fa-times"></i>
+    </span>
   </div>
 <% } %>
