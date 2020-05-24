@@ -1,5 +1,6 @@
 const checkoutBtn = document.querySelector(".checkout");
 const cartBtn = document.querySelector(".cart-btn");
+const modifyBtn = document.querySelector(".modify-btn");
 const addBtn = document.querySelector(".add-item");
 const closeCartBtn = document.querySelector(".close-cart");
 const clearCartBtn = document.querySelector(".clear-cart");
@@ -12,6 +13,9 @@ const amount = document.querySelector(".item-amount");
 const checkoutSummary = document.querySelector(".checkout-summary");
 const closeMessage = document.querySelector(".message-close");
 const message = document.querySelector(".message");
+const orderTotal = document.querySelector(".order-total");
+const itemTotal = document.querySelector(".item-total");
+const postage = document.querySelector(".postage");
 
 let cart = [];
 let add2CartButtons = [];
@@ -66,6 +70,12 @@ class Storage {
 //SHOPPING CART//
 //variables
 
+if (modifyBtn != null) {
+  modifyBtn.addEventListener("click", () => {
+    showCart();
+  });
+}
+
 cartBtn.addEventListener("click", () => {
   showCart();
 });
@@ -93,21 +103,15 @@ function addCartItem(item, destination) {
     </div>
     <div class="product-info-wrapper">
       <div class="product-info">
-
         <div>${item.name}</div>
-
-
         <div>
-
           <span class="qty qty-sub" data-id=${item.id}>-</span>
           <p class="item-amount" data-id=${item.amountid}>${item.amount}</p>
           <span class="qty qty-add" data-id=${item.id} >+</span>
-
         </div>
       </div>
       <div class="product-price">£${item.price}</div>
        <div class="remove-item" data-id=${item.id}>x</div>
-
     </div>
 `;
   destination.appendChild(div);
@@ -145,6 +149,7 @@ function cartController() {
           lowerAmount.parentElement.parentElement.parentElement.parentElement
         );
         removeItem(event.target.dataset.id);
+        console.log("here");
         updateCart(cart);
       }
     }
@@ -153,21 +158,42 @@ function cartController() {
 
 function updateCart(cart) {
   let tempTotal = 0;
+  let tempPostage = 0;
+  let tempOrderTotal = 0;
   let itemsTotal = 0;
+
   cart.map(item => {
     tempTotal += item.price * item.amount;
     itemsTotal += item.amount;
   });
-  Total.innerText = parseFloat(tempTotal.toFixed(2));
+
+  tempTotal = parseFloat(tempTotal.toFixed(2));
+  console.log(tempTotal);
+
+  if (itemsTotal > 0) {
+    tempPostage = 4.99;
+  }
+
+  tempOrderTotal = tempTotal + tempPostage;
+  tempOrderTotal = parseFloat(tempOrderTotal.toFixed(2));
+  Total.innerText = tempTotal;
   numberInCart.innerText = itemsTotal;
+
+  if (modifyBtn != null) {
+    itemTotal.innerText = "£ " + tempTotal;
+    postage.innerText = "£ " + tempPostage;
+    orderTotal.innerText = "£ " + tempOrderTotal;
+  }
 }
 
 function removeItem(id) {
   cart = cart.filter(item => item.id !== id);
   Storage.saveCart(cart);
   let button = add2CartButtons.find(button => button.dataset.id === id);
-  button.disabled = false;
-  button.innerHTML = `<i class="fas fa-shopping-cart"></i> ADD TO BASKET`;
+  if (button != undefined) {
+    button.disabled = false;
+    button.innerHTML = `<i class="fas fa-shopping-cart"></i> ADD TO BASKET`;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
