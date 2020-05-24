@@ -104,14 +104,16 @@ function addCartItem(item, destination) {
     <div class="product-info-wrapper">
       <div class="product-info">
         <div>${item.name}</div>
-        <div>
+        <div class="quantity-control">
+        <span>QTY / </span>
           <span class="qty qty-sub" data-id=${item.id}>-</span>
-          <p class="item-amount" data-id=${item.amountid}>${item.amount}</p>
+          <span class="item-amount" data-id=${item.amountid}>${item.amount}</span>
           <span class="qty qty-add" data-id=${item.id} >+</span>
         </div>
+        <div class="remove-item" data-id=${item.id}>remove</div>
       </div>
       <div class="product-price">£${item.price}</div>
-       <div class="remove-item" data-id=${item.id}>x</div>
+       
     </div>
 `;
   destination.appendChild(div);
