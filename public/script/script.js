@@ -1,5 +1,6 @@
 const checkoutBtn = document.querySelector(".checkout");
 const cartBtn = document.querySelector(".cart-btn");
+const modifyBtn = document.querySelector(".modify-btn");
 const addBtn = document.querySelector(".add-item");
 const closeCartBtn = document.querySelector(".close-cart");
 const clearCartBtn = document.querySelector(".clear-cart");
@@ -10,6 +11,9 @@ const Total = document.querySelector(".total");
 const cartContent = document.querySelector(".cart-content");
 const amount = document.querySelector(".item-amount");
 const checkoutSummary = document.querySelector(".checkout-summary");
+const orderTotal = document.querySelector(".order-total");
+const itemTotal = document.querySelector(".item-total");
+const postage = document.querySelector(".postage");
 
 let cart = [];
 let add2CartButtons = [];
@@ -62,6 +66,12 @@ class Storage {
 cartBtn.addEventListener("click", () => {
   showCart();
 })
+
+if (modifyBtn != null) {
+  modifyBtn.addEventListener("click", () => {
+    showCart();
+  })
+}
 
 closeCartBtn.addEventListener("click", () => {
   hideCart();
@@ -147,13 +157,24 @@ function cartController() {
 
 function updateCart(cart) {
   let tempTotal = 0;
+  let tempPostage = 4.99;
+  let tempOrderTotal = 0;
   let itemsTotal = 0;
   cart.map(item => {
     tempTotal += item.price * item.amount;
     itemsTotal += item.amount;
   });
+
+  tempOrderTotal = tempTotal + tempPostage;
+
   Total.innerText = parseFloat(tempTotal.toFixed(2));
   numberInCart.innerText = itemsTotal;
+
+  // if (modifyBtn != null) {
+  //   itemTotal.innerText = "£ " + Total.innerText;
+  //   postage.innerText = "£ " + tempPostage;
+  //   orderTotal.innerText = "£ " + tempOrderTotal;
+  // }
 }
 
 function removeItem(id) {
@@ -170,9 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cart = Storage.getCart();
   add2Cart();
   cart.forEach(item => this.addCartItem(item, cartContent));
-
   cartController();
-
 })
 
 checkoutBtn.addEventListener("click", () => {

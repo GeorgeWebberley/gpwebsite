@@ -1,6 +1,8 @@
 :root {
   --primaryColor: white;
+  --secondaryColor:rgb(230, 230, 230);
   --mainTransition: all 0.3s linear;
+  --mainFont: "Raleway", sans-serif;
 }
 
 body {
@@ -18,7 +20,7 @@ body {
   padding-bottom: 175px;
 }
 #nav-bar {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--mainFont);
   position: sticky;
   top: 0;
   display: flex;
@@ -127,7 +129,7 @@ body {
   font-size: 1.7rem;
   cursor: pointer;
 }
-.cart .checkout-container h2 {
+.cart h2 {
   text-transform: uppercase;
   text-align: center;
 
@@ -180,6 +182,8 @@ body {
 .cart-footer{
   text-align: center;
 }
+
+
 .checkout {
   padding: 1rem 3rem;
   text-transform: uppercase;
@@ -195,7 +199,7 @@ body {
 }
 
 .about {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--mainFont);
   color: black;
   font-size: 20px;
   margin: 0.3em;
@@ -209,7 +213,7 @@ body {
 
 #shop {
   color: grey;
-  font-family: "Raleway", sans-serif;
+  font-family: var(--mainFont);
   font-size: 40px;
   margin-left: 0.5em;
   margin-top: 0.2em;
@@ -317,7 +321,7 @@ li {
 /* ---------ITEM LIST PAGE ---------- */
 
 .jewellery-list-container {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--mainFont);
   margin: 0 5%;
   width: 90%;
 }
@@ -390,7 +394,7 @@ li {
 .item-page-details {
   margin: auto;
   display: flex;
-  font-family: "Raleway", sans-serif;
+  font-family: var(--mainFont);
   max-width: 1170px;
   align-items: center;
 }
@@ -587,9 +591,55 @@ li {
 }
 
 /* CHECKOUT */
+
 .checkout-container{
+padding-top: 3%;
 text-align: center;
+align-items: center;
+font-size: 1em;
 }
+
+.checkout-summary{
+  
+  display: inline-block;
+   width: 20%;
+  height:30%;
+}
+
+.checkout-details{
+  font-family: var(--mainFont);
+  text-transform: uppercase;
+  padding-top: 20%;
+  padding-bottom: 20%;
+}
+
+.checkout-item{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.checkout-icons{
+ width:40%;
+}
+
+.modify-btn{
+  margin: 5%;
+  padding: 1rem 3rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: var(--secondaryColor);
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.modify-btn :hover{
+  background-color: var(--primaryColor);
+}
+
+
 /* -------------BUTTONS------------- */
 
 .btn {
@@ -621,7 +671,7 @@ text-align: center;
 /* --------MESSAGES------- */
 
 .message {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--mainFont);
   text-align: center;
   font-size: 1.5rem;
   width: 50%;
