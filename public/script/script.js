@@ -14,45 +14,50 @@ const checkoutSummary = document.querySelector(".checkout-summary");
 let cart = [];
 let add2CartButtons = [];
 
-
 function add2Cart() {
   const buttons = [...document.querySelectorAll(".item-btn")];
   add2CartButtons = buttons;
   buttons.forEach(button => {
-
     let id = button.dataset.id;
     let inCart = cart.find(item => item.id === id);
 
     if (inCart) {
-      button.innerText = 'In Cart';
+      button.innerText = "In Cart";
       button.disabled = true;
     }
 
-    button.addEventListener("click", (event) => {
-      event.target.innerText = 'In Cart';
+    button.addEventListener("click", event => {
+      event.target.innerText = "In Cart";
       event.target.disabled = true;
 
       let name = button.dataset.name;
       let price = button.dataset.price;
       let imageName = button.dataset.image;
       let id = button.dataset.id;
-      let product = { id: id, name: name, price: price, image: imageName, amount: 1, amountid: id };
+      let product = {
+        id: id,
+        name: name,
+        price: price,
+        image: imageName,
+        amount: 1,
+        amountid: id
+      };
       cart = [...cart, product];
       Storage.saveCart(cart);
       addCartItem(product, cartContent);
       showCart();
-
     });
   });
 }
 
 class Storage {
-
   static saveCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
   }
   static getCart() {
-    return (localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [];
+    return localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
   }
 }
 
@@ -61,11 +66,11 @@ class Storage {
 
 cartBtn.addEventListener("click", () => {
   showCart();
-})
+});
 
 closeCartBtn.addEventListener("click", () => {
   hideCart();
-})
+});
 
 function showCart() {
   cartOverlay.classList.add("transparentBackground");
@@ -77,7 +82,6 @@ function hideCart() {
   cartDOM.classList.remove("showCart");
 }
 
-
 function addCartItem(item, destination) {
   const div = document.createElement("div");
   div.classList.add("cart-product");
@@ -87,10 +91,10 @@ function addCartItem(item, destination) {
     </div>
     <div class="product-info-wrapper">
       <div class="product-info">
-     
+
         <div>${item.name}</div>
-       
-        
+
+
         <div>
 
           <span class="qty qty-sub" data-id=${item.id}>-</span>
@@ -110,12 +114,12 @@ function addCartItem(item, destination) {
 
 function cartController() {
   cartContent.addEventListener("click", event => {
-
     if (event.target.classList.contains("remove-item")) {
-      cartContent.removeChild(event.target.parentElement.parentElement.parentElement);
+      cartContent.removeChild(
+        event.target.parentElement.parentElement.parentElement
+      );
       removeItem(event.target.dataset.id);
       updateCart(cart);
-
     } else if (event.target.classList.contains("qty-add")) {
       let addAmount = event.target;
       let id = addAmount.dataset.id;
@@ -124,7 +128,6 @@ function cartController() {
       Storage.saveCart(cart);
       addAmount.previousElementSibling.innerText = tempItem.amount;
       updateCart(cart);
-
     } else if (event.target.classList.contains("qty-sub")) {
       let lowerAmount = event.target;
       let id = lowerAmount.dataset.id;
@@ -135,9 +138,10 @@ function cartController() {
         Storage.saveCart(cart);
         lowerAmount.nextElementSibling.innerText = tempItem.amount;
         updateCart(cart);
-
       } else {
-        cartContent.removeChild(lowerAmount.parentElement.parentElement.parentElement.parentElement);
+        cartContent.removeChild(
+          lowerAmount.parentElement.parentElement.parentElement.parentElement
+        );
         removeItem(event.target.dataset.id);
         updateCart(cart);
       }
@@ -164,20 +168,17 @@ function removeItem(id) {
   button.innerHTML = `<i class="fas fa-shopping-cart"></i> ADD TO BASKET`;
 }
 
-
-document.addEventListener('DOMContentLoaded', () => {
-
+document.addEventListener("DOMContentLoaded", () => {
   cart = Storage.getCart();
   add2Cart();
   cart.forEach(item => this.addCartItem(item, cartContent));
 
   cartController();
-
-})
+});
 
 checkoutBtn.addEventListener("click", () => {
   cart.forEach(item => this.addCartItem(item, checkoutSummary));
-})
+});
 
 //CAROUSEL
 var slideIndex = 1;
