@@ -20,6 +20,11 @@
         </a>
 
         <div class="navbar-links">
+          <% if (login) { %>
+            <form action="/admin/logout?_method=DELETE" method="POST">
+              <button class="logout navbar-link" type="submit">Logout</button>
+            </form>
+          <% } %>
           <a class="navbar-link" href="/admin">Admin</a>
           <a class="navbar-link" href="/about">About</a>
           <a class="navbar-link" href="/jewellery/earring">Earrings</a>

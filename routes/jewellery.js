@@ -1,23 +1,18 @@
 "use strict";
 const express = require("express");
 const sqlite = require("sqlite");
+const getDb = require("../config/database").getDb;
 
 // get the router method from express
 const router = express.Router();
-
 
 router.get("/checkout", (req, res) => {
   res.render("checkout");
 });
 
-
-router.get("/", (req, res) => {
-  res.send("Jewellery");
-});
-
 router.get("/:type", async (req, res) => {
   try {
-    const db = await sqlite.open("./db.sqlite");
+    const db = getDb(sqlite);
     const jewellery = await db.all(
       `select * from jewellery where type="${req.params.type}"`
     );
@@ -33,7 +28,7 @@ router.get("/:type", async (req, res) => {
 
 router.get("/:type/:id", async (req, res) => {
   try {
-    const db = await sqlite.open("./db.sqlite");
+    const db = getDb(sqlite);
     const item = await db.get(
       `select * from jewellery where rowid="${req.params.id}"`
     );
@@ -49,6 +44,5 @@ router.get("/:type/:id", async (req, res) => {
     res.redirect("/");
   }
 });
-
 
 module.exports = router;

@@ -9,12 +9,10 @@
       <span class="item-price">
         £<%= item.price %>
       </span>
-      <button class="btn btn-primary" type="button" name="button">Add to basket</button>
+      <button class="btn btn-primary add-to-basket" type="button" name="button">Add to basket</button>
     </div>
 </section>
-<div class="bar">
-
-</div>
+<div class="bar"></div>
 <!-- MORE ITEMS -->
 <section class="more-items">
   <h2>Similar Products</h2>
@@ -22,14 +20,15 @@
     <% similarProducts.forEach(similarItem => { %>
       <article class="product">
           <div class="img-container">
-            <a href="/<%=similarItem.type%>/<%=similarItem.id%>">
+            <a href="/jewellery/<%= similarItem.type %>/<%= similarItem.id %>">
               <img
                 src="/db_images/<%= similarItem.imageName %>"
                 alt="product"
                 class="item-img"
               />
             </a>
-            <button class="item-btn">
+            <button data-id="<%=similarItem.id%>" data-image="<%=similarItem.imageName%>" data-price="<%= similarItem.price %>"
+              data-name="<%= similarItem.name %>" class="item-btn">
             <i class="fas fa-shopping-cart"></i>
             ADD TO BASKET
             </button>

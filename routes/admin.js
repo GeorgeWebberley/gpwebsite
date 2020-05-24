@@ -4,6 +4,7 @@ require("dotenv").config();
 // get the router method from express
 const router = express.Router();
 const sqlite = require("sqlite");
+const getDb = require("../config/database").getDb;
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 // allows us to deal with image objects and save them
@@ -56,7 +57,7 @@ router.post("/register", checkNotAdmin, async (req, res) => {
     });
   } else {
     try {
-      const db = await sqlite.open("./db.sqlite");
+      const db = getDb(sqlite);
       // Check if user exists
       const user = await db.get(
         `select count(1) as c from admin where username="${username}"`
@@ -74,7 +75,7 @@ router.post("/register", checkNotAdmin, async (req, res) => {
       } else {
         // Else, we can hash the password and insert new admin into database
         const passwordHash = await bcrypt.hash(password, 10);
-        insertAdmin(db, username, passwordHash);
+        insertAdmin(username, passwordHash);
         res.redirect("/admin/login");
       }
     } catch (e) {
@@ -103,7 +104,7 @@ router.post(
   upload.single("image"),
   async (req, res) => {
     try {
-      const db = await sqlite.open("./db.sqlite");
+      const db = getDb(sqlite);
       // Set the id to null so that it will auto-increment
       await db.run(`insert into jewellery values (
       NULL,
@@ -126,7 +127,7 @@ router.post(
 
 router.get("/removeItem", checkAdmin, async (req, res) => {
   try {
-    const db = await sqlite.open("./db.sqlite");
+    const db = getDb(sqlite);
     const jewellery = await db.all(`select * from jewellery ORDER BY name`);
     res.render("admin/removeItem", {
       jewellery: jewellery
@@ -139,7 +140,7 @@ router.get("/removeItem", checkAdmin, async (req, res) => {
 
 router.delete("/removeItem/:id", checkAdmin, async (req, res) => {
   try {
-    const db = await sqlite.open("./db.sqlite");
+    const db = getDb(sqlite);
     await db.get(`DELETE FROM jewellery WHERE id=${req.params.id}`);
     const jewellery = await db.all(`select * from jewellery ORDER BY name`);
     res.render("admin/removeItem", {
@@ -153,7 +154,7 @@ router.delete("/removeItem/:id", checkAdmin, async (req, res) => {
 
 router.get("/editItem/:id", checkAdmin, async (req, res) => {
   try {
-    const db = await sqlite.open("./db.sqlite");
+    const db = getDb(sqlite);
     const item = await db.get(
       `select * from jewellery WHERE id=${req.params.id}`
     );
@@ -168,7 +169,7 @@ router.get("/editItem/:id", checkAdmin, async (req, res) => {
 
 router.put("/editItem/:id", upload.single("image"), async (req, res) => {
   try {
-    const db = await sqlite.open("./db.sqlite");
+    const db = getDb(sqlite);
     let oldItem = await db.get(
       `select * from jewellery WHERE id=${req.params.id}`
     );
@@ -215,8 +216,9 @@ function checkFields(username, password, password2, master) {
   return errors;
 }
 
-async function insertAdmin(db, username, passwordHash) {
+async function insertAdmin(username, passwordHash) {
   try {
+    const db = getDb(sqlite);
     await db.run(`insert into admin values (
       NULL,
       "${username}",
