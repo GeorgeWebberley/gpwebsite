@@ -657,7 +657,7 @@ li {
   cursor: pointer;
 }
 
-.modify-btn :hover {
+.modify-btn:hover {
   background-color: var(--primaryColor);
 }
 
