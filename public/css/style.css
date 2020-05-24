@@ -1,6 +1,6 @@
 :root {
   --primaryColor: white;
-  --secondaryColor:rgb(230, 230, 230);
+  --secondaryColor: rgb(230, 230, 230);
   --mainTransition: all 0.3s linear;
   --mainFont: "Raleway", sans-serif;
 }
@@ -146,14 +146,12 @@ body {
   width: 50%;
 }
 .product-image-wrapper img {
-  margin: 14% 10% 14% 0;
   max-width: 100%;
   max-height: 100%;
   display: block;
 }
 
 .product-info-wrapper {
-  left: 3%;
   width: 100%;
   display: flex;
   flex-direction: flex-start;
@@ -168,16 +166,10 @@ body {
 
 .remove-item {
   cursor: pointer;
-  text-decoration: underline;
 }
 
 .qty {
   cursor: pointer;
- padding: 10%;
-}
-
-.quantity-control{
-  display: inline;
 }
 
 .product-price {
@@ -189,7 +181,6 @@ body {
 .cart-footer {
   text-align: center;
 }
-
 
 .checkout {
   padding: 1rem 3rem;
@@ -621,39 +612,38 @@ li {
 
 /* CHECKOUT */
 
-.checkout-container{
-padding-top: 3%;
-text-align: center;
-align-items: center;
-font-size: 1em;
+.checkout-container {
+  padding-top: 3%;
+  text-align: center;
+  align-items: center;
+  font-size: 1em;
 }
 
-.checkout-summary{
-  
+.checkout-summary {
   display: inline-block;
-   width: 20%;
-  height:30%;
+  width: 20%;
+  height: 30%;
 }
 
-.checkout-details{
+.checkout-details {
   font-family: var(--mainFont);
   text-transform: uppercase;
   padding-top: 20%;
   padding-bottom: 20%;
 }
 
-.checkout-item{
+.checkout-item {
   display: flex;
   justify-content: space-between;
   padding-top: 5%;
   padding-bottom: 5%;
 }
 
-.checkout-icons{
- width:40%;
+.checkout-icons {
+  width: 40%;
 }
 
-.modify-btn{
+.modify-btn {
   margin: 5%;
   padding: 1rem 3rem;
   text-transform: uppercase;
@@ -664,10 +654,9 @@ font-size: 1em;
   cursor: pointer;
 }
 
-.modify-btn :hover{
+.modify-btn :hover {
   background-color: var(--primaryColor);
 }
-
 
 /* -------------BUTTONS------------- */
 
