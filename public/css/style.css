@@ -643,7 +643,8 @@ li {
 }
 
 .checkout-icons {
-  width: 40%;
+  width: 80%;
+  max-width: 25rem;
 }
 
 .modify-btn {
