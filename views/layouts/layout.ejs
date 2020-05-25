@@ -10,27 +10,40 @@
   <script src="https://kit.fontawesome.com/cba779aa10.js" crossorigin="anonymous"></script>
 
 </head>
-
 <body>
   <div class="content-wrap">
-    <section id="nav-bar">
+
+    <!-- NAVBAR -->
+    <section class="navbar">
       <div class="menu-center">
         <a href="/" class="site-icon">
           <div>Jewellery Shop</div>
         </a>
-
+        <!-- NAVBAR LINKS -->
         <div class="navbar-links">
-          <% if (login) { %>
-            <form action="/admin/logout?_method=DELETE" method="POST">
-              <button class="logout navbar-link" type="submit">Logout</button>
-            </form>
-          <% } %>
-          <a class="navbar-link" href="/admin">Admin</a>
-          <a class="navbar-link" href="/about">About</a>
-          <a class="navbar-link" href="/jewellery/earring">Earrings</a>
-          <a class="navbar-link" href="/jewellery/necklace">Necklaces</a>
-          <a class="navbar-link" href="/jewellery/bracelet">Bracelets</a>
-          <a class="navbar-link" href="/jewellery/ring">Rings</a>
+          <!-- LINK 1 -->
+          <div class="drop-down">
+            <a class="drop-down-title" href="/admin">Admin</a>
+            <div class="drop-down-list">
+              <% if (login) { %>
+                <form action="/admin/logout?_method=DELETE" method="POST">
+                  <button class="logout drop-down-link" type="submit">Logout</button>
+                </form>
+              <% } %>
+            </div>
+          </div>
+          <!-- LINK 2 -->
+          <a class="drop-down-title" href="/about">About</a>
+          <!-- LINK 3 -->
+          <div class="drop-down">
+            <a class="drop-down-title" href="/jewellery/all">Jewellery</a>
+            <div class="drop-down-list">
+              <a class="drop-down-link" href="/jewellery/earring">Earrings</a>
+              <a class="drop-down-link" href="/jewellery/necklace">Necklaces</a>
+              <a class="drop-down-link" href="/jewellery/bracelet">Bracelets</a>
+              <a class="drop-down-link" href="/jewellery/ring">Rings</a>
+            </div>
+          </div>
           <div class="cart-btn">
             <span class="cart-icon">
               <i class="fas fa-shopping-bag"></i>
@@ -41,7 +54,6 @@
       </div>
     </section>
 
-
     <!--Start of Cart-->
     <div class="cart-overlay">
       <div class="cart">
@@ -49,81 +61,16 @@
           <i class="fas fa-window-close"></i>
         </span>
         <h2>my cart</h2>
-        <div class="cart-content">
-
-        </div>
+        <div class="cart-content"></div>
         <div class="cart-footer">
           <h2>Total : £
             <span class="total">0</span>
           </h2>
-          <a href="/jewellery/checkout"><button class="checkout">Checkout</button></a>
+          <a class="checkout" href="/jewellery/checkout">Checkout</a>
         </div>
-
-
       </div>
     </div>
     <%- body %>
-
-    <!-- <div class="slideshow-container">
-      <div class="mySlides fade">
-        <img class="landing" src="images/LandingImage1.png" />
-      </div>
-
-      <div class="mySlides fade">
-        <img class="landing" src="images/LandingImage2.png" />
-      </div>
-
-      <div class="mySlides fade">
-        <img class="landing" src="images/LandingImage3.png" />
-      </div>
-
-      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-      <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    </div>
-
-    <p class="about">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupixatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </p>
-
-    <div class="line"></div>
-
-    <h1 id="shop">Shop</h1>
-
-    <div class="grid">
-      <div class="grid_item">
-        <img src="images/Ring.png" />
-        <div class="overlay">
-          <div class="text">Rings</div>
-        </div>
-      </div>
-
-      <div class="grid_item">
-        <img src="images/Necklace.png" />
-        <div class="overlay">
-          <div class="text">Necklaces</div>
-        </div>
-      </div>
-
-      <div class="grid_item">
-        <img src="images/Earring.png" />
-        <div class="overlay">
-          <div class="text">Earrings</div>
-        </div>
-      </div>
-
-      <div class="grid_item">
-        <img src="images/Bracelet.png" />
-        <div class="overlay">
-          <div class="text">Bracelets</div>
-        </div>
-      </div>
-    </div> -->
   </div>
   <footer class="footer">
     <ul class="footerList">
@@ -137,9 +84,5 @@
     </ul>
   </footer>
 
-  <!-- <script src="script.js" type="javascript"></script>
-
-    <script src="script/script.js"></script> -->
 </body>
-
 </html>

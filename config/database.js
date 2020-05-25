@@ -1,7 +1,17 @@
 // ---- DATABASE SETUP ----
+const sqlite = require("sqlite");
+// declare db object
 let db;
+// declare variables for prepared statements
+let insertAdmin;
+let insertItem;
+let editItem;
+let deleteItem;
+let selectItem;
+let selectType;
+let countUsers;
 
-async function initDb(sqlite) {
+async function initDb() {
   try {
     db = await sqlite.open("./db.sqlite");
     const jewelleryTable = `
@@ -19,6 +29,7 @@ async function initDb(sqlite) {
         username TEXT NOT NULL,
         passwordHash TEXT NOT NULL)`;
     await db.run(adminTable);
+    initPreparedStatements();
     return db;
   } catch (e) {
     console.log(e);
@@ -26,15 +37,106 @@ async function initDb(sqlite) {
   }
 }
 
-function getDb(sqlite) {
+async function initPreparedStatements() {
+  try {
+    // Set the id to null so that it will auto-increment
+    insertAdmin = await db.prepare("insert into admin values (NULL, ?, ?)");
+    insertItem = await db.prepare(
+      "insert into jewellery values (NULL, ?, ?, ?, ?, ?)"
+    );
+    editItem = await db.prepare(
+      "UPDATE jewellery SET name=?, type=?, price=?, imageName=?, description=? WHERE id=?"
+    );
+    deleteItem = await db.prepare("DELETE FROM jewellery WHERE id=?");
+    selectItem = await db.prepare("select * from jewellery WHERE id=?");
+    selectType = await db.prepare("select * from jewellery WHERE type=?");
+    countUsers = await db.prepare(
+      "select count(1) as c from admin where username=?"
+    );
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+// Getters
+
+function getDb() {
   if (!db) {
-    return initDb(sqlite);
+    return initDb();
   } else {
     return db;
   }
 }
 
+function getInsertAdmin() {
+  if (!db) {
+    initDb();
+  }
+  return insertAdmin;
+}
+
+function getInsertItem() {
+  if (!db) {
+    initDb();
+  }
+  return insertItem;
+}
+
+function getEditItem() {
+  if (!db) {
+    initDb();
+  }
+  return editItem;
+}
+
+function getDeleteItem() {
+  if (!db) {
+    initDb();
+  }
+  return deleteItem;
+}
+
+function getSelectItem() {
+  if (!db) {
+    initDb();
+  }
+  return selectItem;
+}
+
+function getSelectType() {
+  if (!db) {
+    initDb();
+  }
+  return selectType;
+}
+
+function getCountUsers() {
+  if (!db) {
+    initDb();
+  }
+  return countUsers;
+}
+
+function close() {
+  insertAdmin.finalize();
+  insertItem.finalize();
+  editItem.finalize();
+  deleteItem.finalize();
+  selectItem.finalize();
+  selectType.finalize();
+  countUsers.finalize();
+  db.close();
+}
+
 module.exports = {
   initDb,
-  getDb
+  getDb,
+  getInsertAdmin,
+  getInsertItem,
+  getEditItem,
+  getDeleteItem,
+  getSelectItem,
+  getSelectType,
+  getCountUsers,
+  close
 };

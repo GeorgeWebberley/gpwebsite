@@ -21,7 +21,7 @@ let cart = [];
 let add2CartButtons = [];
 
 function add2Cart() {
-  const buttons = [...document.querySelectorAll(".item-btn")];
+  const buttons = [...document.querySelectorAll(".add-to-basket")];
   add2CartButtons = buttons;
   buttons.forEach(button => {
     let id = button.dataset.id;
@@ -84,6 +84,10 @@ closeCartBtn.addEventListener("click", () => {
   hideCart();
 });
 
+cartOverlay.addEventListener("click", () => {
+  hideCart();
+});
+
 function showCart() {
   cartOverlay.classList.add("transparentBackground");
   cartDOM.classList.add("showCart");
@@ -113,7 +117,7 @@ function addCartItem(item, destination) {
         <div class="remove-item" data-id=${item.id}>remove</div>
       </div>
       <div class="product-price">£${item.price}</div>
-       
+
     </div>
 `;
   destination.appendChild(div);
