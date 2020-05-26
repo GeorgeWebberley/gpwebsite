@@ -1,0 +1,136 @@
+/* -------INDEX PAGE IMAGE SLIDESHOW-------- */
+.slideshow-container {
+  width: 100%;
+  position: relative;
+}
+
+.mySlides {
+  display: none;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: var(--primaryColor);
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+/* -------TEXT SECTION-------- */
+
+.landing {
+  width: 100%;
+}
+
+.landing-text {
+  color: var(--oppositePrimary);
+  font-size: 20px;
+  margin: 0.3em;
+}
+
+.shop {
+  color: var(--tertiaryColor);
+  font-size: 40px;
+  margin-left: 0.5em;
+  margin-top: 0.2em;
+  display: block;
+}
+/* -------JEWELLERY IMAGE SECTION-------- */
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 5%;
+  margin-right: 5%;
+  position: relative;
+}
+
+.grid-item {
+  width: 50%;
+  height: auto;
+  position: relative;
+}
+
+.overlay {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  height: 90%;
+  margin: 5% 5% 5% 5%;
+  width: 90%;
+  background-color: var(--oppositePrimary);
+  text-align: center;
+  align-items: center;
+  transition: var(--mainTransition);
+}
+
+.grid img {
+  margin: 5% 5% 5% 5%;
+  width: 90%;
+}
+
+.text {
+  opacity: 0;
+  margin-top: 5%;
+  color: var(--primaryColor);
+  font-size: 2rem;
+  padding: 16px 32px;
+  transition: var(--mainTransition);
+}
+.overlay:hover {
+  opacity: 0.3;
+  cursor: pointer;
+}
+.overlay:hover .text {
+  opacity: 1;
+}
+
+/* -----------ABOUT PAGE----------- */
+
+.about-section {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  align-items: center;
+}
+
+.about-text {
+  width: 70%;
+  margin: 2rem;
+}
+
+.about-row {
+  display: flex;
+  align-items: center;
+}
+
+.about-image {
+  margin: auto;
+  width: 50%;
+  height: auto;
+}
+
+@media screen and (max-width: 700px) {
+  .about-row {
+    flex-direction: column;
+  }
+  .reverse {
+    flex-direction: column-reverse;
+  }
+  .about-text {
+    width: 80%;
+  }
+}

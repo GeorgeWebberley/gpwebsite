@@ -1,0 +1,12 @@
+:root {
+  --primaryColor: rgb(255, 255, 255);
+  --oppositePrimary: rgb(0, 0, 0);
+  --secondaryColor: rgb(230, 230, 230);
+  --tertiaryColor: rgb(80, 80, 80);
+  --quarternaryColor: rgb(30, 30, 30);
+  --buttonPrimary: rgb(113, 153, 168);
+  --buttonSecondary: rgb(36, 47, 66);
+  --dangerColor: rgb(179, 125, 125);
+  --mainTransition: all 0.3s ease;
+  --mainFont: "Raleway", sans-serif;
+}

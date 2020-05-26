@@ -9,7 +9,8 @@ let editItem;
 let deleteItem;
 let selectItem;
 let selectType;
-let countUsers;
+let selectUser;
+let deserialiseUser;
 
 async function initDb() {
   try {
@@ -50,8 +51,12 @@ async function initPreparedStatements() {
     deleteItem = await db.prepare("DELETE FROM jewellery WHERE id=?");
     selectItem = await db.prepare("select * from jewellery WHERE id=?");
     selectType = await db.prepare("select * from jewellery WHERE type=?");
-    countUsers = await db.prepare(
-      "select count(1) as c from admin where username=?"
+    // countUsers = await db.prepare(
+    //   "select count(1) as c from admin where username=?"
+    // );
+    selectUser = await db.prepare("select * from admin where username=?");
+    deserialiseUser = await db.prepare(
+      "SELECT id, username FROM admin WHERE id=?"
     );
   } catch (e) {
     console.log(e);
@@ -110,11 +115,18 @@ function getSelectType() {
   return selectType;
 }
 
-function getCountUsers() {
+function getSelectUser() {
   if (!db) {
     initDb();
   }
-  return countUsers;
+  return selectUser;
+}
+
+function getDeserialiseUser() {
+  if (!db) {
+    initDb();
+  }
+  return deserialiseUser;
 }
 
 function close() {
@@ -124,7 +136,7 @@ function close() {
   deleteItem.finalize();
   selectItem.finalize();
   selectType.finalize();
-  countUsers.finalize();
+  selectUser.finalize();
   db.close();
 }
 
@@ -137,6 +149,7 @@ module.exports = {
   getDeleteItem,
   getSelectItem,
   getSelectType,
-  getCountUsers,
+  getSelectUser,
+  getDeserialiseUser,
   close
 };
