@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
-  <title>GPWebsite</title>
+  <title>Alistra</title>
   <link rel="stylesheet" type="text/css" href="/css/main.css" />
   <script src="/script/script.js" defer>
   </script>
@@ -10,11 +10,12 @@
   <script src="https://kit.fontawesome.com/cba779aa10.js" crossorigin="anonymous"></script>
 
 </head>
+
 <body>
-  <div class="content-wrap">
+  <main class="content-wrap">
 
     <!-- NAVBAR -->
-    <section class="navbar">
+    <nav class="navbar">
       <div class="menu-center">
         <a href="/" title="Return to the homepage" class="site-icon">
           <div>Alistra</div>
@@ -26,9 +27,9 @@
             <a class="drop-down-title" title="Go to the admin page" href="/admin">Admin</a>
             <div class="drop-down-list">
               <% if (login) { %>
-                <form action="/admin/logout?_method=DELETE" method="POST">
-                  <button class="logout drop-down-link" type="submit">Logout</button>
-                </form>
+              <form action="/admin/logout?_method=DELETE" method="POST">
+                <button class="logout drop-down-link" type="submit">Logout</button>
+              </form>
               <% } %>
             </div>
           </div>
@@ -36,11 +37,15 @@
           <a class="drop-down-title" title="Go to the about page" href="/about">About</a>
           <!-- LINK 3 -->
           <div class="drop-down">
-            <a class="drop-down-title" title="See all jewellery the shop has to offer" href="/jewellery/all">Jewellery</a>
+            <a class="drop-down-title" title="See all jewellery the shop has to offer"
+              href="/jewellery/all">Jewellery</a>
             <div class="drop-down-list">
-              <a class="drop-down-link" title="See all earrings the shop has to offer" href="/jewellery/earring">Earrings</a>
-              <a class="drop-down-link" title="See all necklaces the shop has to offer" href="/jewellery/necklace">Necklaces</a>
-              <a class="drop-down-link" title="See all bracelets the shop has to offer" href="/jewellery/bracelet">Bracelets</a>
+              <a class="drop-down-link" title="See all earrings the shop has to offer"
+                href="/jewellery/earring">Earrings</a>
+              <a class="drop-down-link" title="See all necklaces the shop has to offer"
+                href="/jewellery/necklace">Necklaces</a>
+              <a class="drop-down-link" title="See all bracelets the shop has to offer"
+                href="/jewellery/bracelet">Bracelets</a>
               <a class="drop-down-link" title="See all rings the shop has to offer" href="/jewellery/ring">Rings</a>
             </div>
           </div>
@@ -53,7 +58,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </nav>
     <!-- END OF NAVBAR -->
 
     <!--Start of Cart-->
@@ -76,19 +81,22 @@
 
     <!-- INSERTED HTML -->
     <%- body %>
-  </div>
-<!-- FOOTER -->
+  </main>
+  <!-- FOOTER -->
   <footer class="footer">
     <ul class="footer-list">
-      <li>About</li>
-      <li>FAQ</li>
-      <li>Contact us</li>
-      <li>Delivery</li>
-      <li>Terms and Conditions</li>
-      <li>Privacy and Cookie Policy</li>
-      <li>Accessibility</li>
+      <a class="footer-link" title="Go to the about page" href="/about">
+        <li>About</li>
+      </a>
+      <a class="footer-link" title="Go to the admin page" href="/admin">
+        <li>Admin</li>
+      </a>
+      <li>Contact us : td19582@bristol.ac.uk</li>
+      <li>Organisation Address : 75 Woodland Rd, Bristol BS8 1UB, United Kingdom</li>
+
     </ul>
   </footer>
 
 </body>
+
 </html>
