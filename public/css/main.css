@@ -344,7 +344,7 @@ li {
   position: absolute;
   top: 66%;
   right: 0;
-  background: var(--buttonPrimary);
+  background: var(--secondaryColor);
   border: none;
   padding: 0.5rem 0.75rem;
   font-weight: bold;
