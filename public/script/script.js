@@ -9,7 +9,6 @@ const cartBtn = document.querySelector(".cart-btn");
 const modifyBtn = document.querySelector(".modify-btn");
 const addBtn = document.querySelector(".add-item");
 const closeCartBtn = document.querySelector(".close-cart");
-const clearCartBtn = document.querySelector(".clear-cart");
 const cartDOM = document.querySelector(".cart");
 const cartOverlay = document.querySelector(".cart-overlay");
 const numberInCart = document.querySelector(".number-in-cart");
