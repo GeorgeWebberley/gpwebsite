@@ -1,7 +1,5 @@
 "use strict";
 
-// const nodemon = require("nodemon");
-
 // ---- ASSIGNMENT OF VARIABLES TO QUERY SELECTORS ---- //
 
 const checkoutBtn = document.querySelector(".checkout");
@@ -9,7 +7,6 @@ const cartBtn = document.querySelector(".cart-btn");
 const modifyBtn = document.querySelector(".modify-btn");
 const addBtn = document.querySelector(".add-item");
 const closeCartBtn = document.querySelector(".close-cart");
-const clearCartBtn = document.querySelector(".clear-cart");
 const cartDOM = document.querySelector(".cart");
 const cartOverlay = document.querySelector(".cart-overlay");
 const numberInCart = document.querySelector(".number-in-cart");
@@ -42,17 +39,15 @@ cartBtn.addEventListener("click", () => {
 closeCartBtn.addEventListener("click", () => {
   hideCart();
 });
-
+// Goes to checkout
+checkoutBtn.addEventListener("click", () => {
+  cart.forEach(item => this.addCartItem(item, checkoutSummary));
+});
 // Closes the cart when clicked outside the cart window
 cartOverlay.addEventListener("click", event => {
   if (!cartDOM.contains(event.target)) {
     hideCart();
   }
-});
-
-// Goes to checkout
-checkoutBtn.addEventListener("click", () => {
-  cart.forEach(item => this.addCartItem(item, checkoutSummary));
 });
 // Closes messages
 if (closeMessage != null) {
@@ -64,6 +59,8 @@ if (closeMessage != null) {
 function hideMessage() {
   message.classList.add("hide-message");
 }
+
+
 
 // ---- ADD TO CART AND CART CONTROL FUNCTIONS ---- //
 
@@ -254,6 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cart.forEach(item => this.addCartItem(item, cartContent));
   cartController();
 });
+
 
 
 // ---- HOME PAGE CAROUSEL ---- //

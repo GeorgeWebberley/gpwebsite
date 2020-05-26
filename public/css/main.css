@@ -9,8 +9,9 @@ body {
   position: relative;
   min-height: 100vh;
   background-color: var(--primaryColor);
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
+
 }
 
 .content-wrap {
@@ -26,7 +27,7 @@ body {
   height: 40px;
   width: 100%;
   background-color: var(--secondaryColor);
-  z-index: 1;
+  z-index: 3;
 }
 
 .menu-center {
@@ -116,7 +117,7 @@ body {
 }
 
 .footer-list {
-  font-size: 18px;
+  font-size: 1.5vw;
   columns: 2;
   list-style: none;
   margin: 1em;

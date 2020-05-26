@@ -1,3 +1,37 @@
+.banner-background{
+  background-color: var(--tertiaryColor);
+  z-index: 1;
+  width:100%;
+  position: absolute;
+  height: 1.5%;
+}
+
+.banner{
+  color:white;
+  font-family: helvetica;
+  text-transform: uppercase;
+  font-size: 1vw;
+  animation: banner 10s infinite linear;
+  position: absolute;
+  left: -40%;
+   white-space: nowrap;
+  z-index: 2;
+}
+
+@keyframes banner{
+  0%{
+    left:-40%;
+  }
+  100%{
+    left:110%;
+  }
+}
+
+.ad-image{
+  width: 100%;
+  
+}
+
 /* -------INDEX PAGE IMAGE SLIDESHOW-------- */
 .slideshow-container {
   width: 100%;
@@ -9,6 +43,7 @@
 }
 
 .prev,
+
 .next {
   cursor: pointer;
   position: absolute;
@@ -36,13 +71,13 @@
 
 .landing-text {
   color: var(--oppositePrimary);
-  font-size: 20px;
+  font-size: 1.5vw;
   margin: 0.3em;
 }
 
 .shop {
   color: var(--tertiaryColor);
-  font-size: 40px;
+  font-size: 3vw;
   margin-left: 0.5em;
   margin-top: 0.2em;
   display: block;
@@ -105,6 +140,7 @@
   flex-wrap: wrap;
   max-width: 1200px;
   align-items: center;
+  
 }
 
 .about-text {
