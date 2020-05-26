@@ -2,7 +2,6 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-
 const express = require("express"); // loads module 'express'
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
@@ -13,7 +12,6 @@ const flash = require("express-flash");
 const session = require("express-session");
 const methodOverride = require("method-override");
 // ---- DATABASE SETUP ----
-const sqlite = require("sqlite");
 const dbConfig = require("./config/database");
 // Initial function for connecting to database. Creates tables if not yet created.
 dbConfig.initDb();
@@ -61,11 +59,6 @@ app.use(function(req, res, next) {
   res.locals.login = req.isAuthenticated();
   next();
 });
-//
-// app.use((req, res) => {
-//   res.writeHead(200);
-//   res.end("hello world\n");
-// });
 
 const indexRouter = require("./routes/index");
 const jewelleryRouter = require("./routes/jewellery");
@@ -77,12 +70,9 @@ app.use("/jewellery", jewelleryRouter);
 app.use("/admin", adminRouter);
 
 // ---- SERVER CONNECT ----
-
 const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}...`);
 });
-
-// https.createServer(options, app).listen(8080);
 
 // Close database and server with ctrl-c
 process.on("SIGINT", () => {

@@ -51,9 +51,6 @@ async function initPreparedStatements() {
     deleteItem = await db.prepare("DELETE FROM jewellery WHERE id=?");
     selectItem = await db.prepare("select * from jewellery WHERE id=?");
     selectType = await db.prepare("select * from jewellery WHERE type=?");
-    // countUsers = await db.prepare(
-    //   "select count(1) as c from admin where username=?"
-    // );
     selectUser = await db.prepare("select * from admin where username=?");
     deserialiseUser = await db.prepare(
       "SELECT id, username FROM admin WHERE id=?"
@@ -63,7 +60,7 @@ async function initPreparedStatements() {
   }
 }
 
-// Getters
+// Getters for the DB and different prepared statements
 
 function getDb() {
   if (!db) {
@@ -129,6 +126,7 @@ function getDeserialiseUser() {
   return deserialiseUser;
 }
 
+// Closing function that is called when program terminates with ctrl-c
 function close() {
   insertAdmin.finalize();
   insertItem.finalize();
@@ -137,6 +135,7 @@ function close() {
   selectItem.finalize();
   selectType.finalize();
   selectUser.finalize();
+  deserialiseUser.finalize();
   db.close();
 }
 

@@ -171,3 +171,30 @@
 .hide-message {
   opacity: 0;
 }
+
+/* -------------BUTTONS------------- */
+
+.btn {
+  border: 1px solid var(--oppositePrimary);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-primary {
+  color: var(--primaryColor);
+  background-color: var(--buttonPrimary);
+}
+
+.btn-danger {
+  color: var(--primaryColor);
+  background-color: var(--dangerColor);
+}
+
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+}
