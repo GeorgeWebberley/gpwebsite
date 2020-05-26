@@ -7,13 +7,13 @@
     <% jewellery.forEach(item => { %>
     <article class="product">
       <div class="img-container">
-        <a href="<%=item.type%>/<%=item.id%>">
-          <img src="/db_images/<%= item.imageName %>" alt="product" class="item-img" />
+        <a title="View <%= item.name %>" href="<%=item.type%>/<%=item.id%>">
+          <img src="/db_images/<%= item.imageName %>" alt="Image of <%= item.name %>" class="item-img" />
         </a>
         <button data-id="<%=item.id%>" data-image="<%=item.imageName%>" data-price="<%= item.price %>"
           data-name="<%= item.name %>" class="item-btn add-to-basket">
           <i class="fas fa-shopping-cart"></i>
-          ADD TO BASKET
+          <p>ADD TO BASKET</p>
         </button>
       </div>
       <div class="item-details-row">

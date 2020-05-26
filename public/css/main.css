@@ -1,17 +1,21 @@
 :root {
-  --primaryColor: white;
+  --primaryColor: rgb(255, 255, 255);
+  --oppositePrimary: rgb(0, 0, 0);
   --secondaryColor: rgb(230, 230, 230);
-  --mainTransition: all 0.3s linear;
+  --tertiaryColor: rgb(80, 80, 80);
+  --quarternaryColor: rgb(30, 30, 30);
+  --buttonPrimary: rgb(113, 153, 168);
+  --buttonSecondary: rgb(36, 47, 66);
+  --dangerColor: rgb(179, 125, 125);
+  --mainTransition: all 0.3s ease;
   --mainFont: "Raleway", sans-serif;
 }
 
 body {
-  /* color: var(--primaryColor);
-  background: var(--primaryColor); */
-  font-family: "helvetica neue", "helvetica", sans-serif;
+  font-family: var(--mainFont);
   position: relative;
   min-height: 100vh;
-  background-color: white;
+  background-color: var(--primaryColor);
   padding: 0px;
   margin: 0px;
 }
@@ -20,14 +24,13 @@ body {
   padding-bottom: 175px;
 }
 .navbar {
-  font-family: var(--mainFont);
   position: sticky;
   top: 0;
   display: flex;
   justify-content: center;
   height: 40px;
   width: 100%;
-  background-color: rgb(230, 230, 230);
+  background-color: var(--secondaryColor);
   z-index: 1;
 }
 /* start here */
@@ -39,7 +42,7 @@ body {
 }
 
 .site-icon {
-  color: rgb(80, 80, 80);
+  color: var(--tertiaryColor);
   font-size: 2rem;
   text-decoration: none;
 }
@@ -55,14 +58,14 @@ body {
 }
 
 .cart-icon {
-  color: black;
+  color: var(--oppositePrimary);
   position: absolute;
   font-size: 180%;
   /* bring your own prefixes */
 }
 .number-in-cart {
   position: absolute;
-  color: white;
+  color: var(--primaryColor);
   top: 30%;
   right: 65%;
 }
@@ -86,7 +89,7 @@ body {
   height: 100%;
   overflow: scroll;
   z-index: 3;
-  background: rgb(230, 230, 230);
+  background: var(--secondaryColor);
   padding: 1.5rem;
   transition: var(--mainTransition);
   transform: translateX(100%);
@@ -120,7 +123,7 @@ body {
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   height: 15%;
-  color: #767676;
+  color: var(--tertiaryColor);
 }
 .product-image-wrapper {
   width: 50%;
@@ -170,16 +173,16 @@ body {
   font-size: 1rem;
   font-weight: bold;
   background-color: var(--primaryColor);
-  color: black;
-  border: 1px solid black;
+  color: var(--oppositePrimary);
+  border: 1px solid var(--oppositePrimary);
   cursor: pointer;
   margin-bottom: 10%;
   text-decoration: none;
-  transition: 0.3s ease;
+  transition: var(--mainTransition);
 }
 
 .checkout:hover {
-  background-color: rgb(80, 80, 80);
+  background-color: var(--tertiaryColor);
   color: var(--primaryColor);
 }
 
@@ -188,8 +191,7 @@ body {
 }
 
 .about {
-  font-family: var(--mainFont);
-  color: black;
+  color: var(--oppositePrimary);
   font-size: 20px;
   margin: 0.3em;
 }
@@ -201,8 +203,7 @@ body {
 }
 
 #shop {
-  color: grey;
-  font-family: var(--mainFont);
+  color: var(--tertiaryColor);
   font-size: 40px;
   margin-left: 0.5em;
   margin-top: 0.2em;
@@ -214,7 +215,7 @@ body {
   width: 100%;
   bottom: 0;
   height: 175px;
-  background-color: rgba(230, 230, 230, 0.3);
+  background-color: var(--secondaryColor);
 }
 
 .footerList {
@@ -246,10 +247,10 @@ body {
   height: 90%;
   margin: 5% 5% 5% 5%;
   width: 90%;
-  background-color: black;
+  background-color: var(--oppositePrimary);
   text-align: center;
   align-items: center;
-  transition: 0.3s ease;
+  transition: var(--mainTransition);
 }
 
 .grid img {
@@ -260,10 +261,10 @@ body {
 .text {
   opacity: 0;
   margin-top: 5%;
-  color: white;
+  color: var(--primaryColor);
   font-size: 2rem;
   padding: 16px 32px;
-  transition: 0.3s ease;
+  transition: var(--mainTransition);
 }
 .overlay:hover {
   opacity: 0.3;
@@ -294,7 +295,7 @@ li {
   width: auto;
   margin-top: -22px;
   padding: 16px;
-  color: white;
+  color: var(--primaryColor);
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
@@ -310,7 +311,6 @@ li {
 /* ---------ITEM LIST PAGE ---------- */
 
 .jewellery-list-container {
-  font-family: var(--mainFont);
   margin: 0 5%;
   width: 90%;
 }
@@ -344,17 +344,17 @@ li {
   position: absolute;
   top: 66%;
   right: 0;
-  background: rgb(230, 239, 255);
+  background: var(--buttonPrimary);
   border: none;
   padding: 0.5rem 0.75rem;
   font-weight: bold;
-  transition: all 0.4s ease;
+  transition: var(--mainTransition);
   transform: translateX(101%);
   cursor: pointer;
 }
 .item-btn:hover {
-  color: white;
-  background-color: rgb(36, 47, 66);
+  color: var(--primaryColor);
+  background-color: var(--buttonSecondary);
 }
 .fa-shopping-cart {
   margin-right: 0.5rem;
@@ -383,7 +383,6 @@ li {
 .item-page-details {
   margin: auto;
   display: flex;
-  font-family: var(--mainFont);
   max-width: 1170px;
   align-items: center;
 }
@@ -407,7 +406,6 @@ li {
 }
 
 .more-items {
-  font-family: "Raleway", sans-serif;
   margin: 1rem;
 }
 
@@ -417,9 +415,6 @@ li {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
-  /* display: grid; */
-  /* grid-template-columns: auto auto; */
-  /* grid-template-columns: repeat(auto-fit, minmax(40%, 1fr)); */
   max-width: 1200px;
   align-items: center;
 }
@@ -458,8 +453,7 @@ li {
   width: 100%;
   text-align: center;
   margin-top: 2rem;
-  font-family: "Raleway", sans-serif;
-  color: rgb(80, 80, 80);
+  color: var(--tertiaryColor);
 }
 
 .manage-options {
@@ -479,7 +473,7 @@ li {
 .manage-image {
   width: 20rem;
   min-height: 100%;
-  border: 1px solid grey;
+  border: 1px solid var(--tertiaryColor);
   opacity: 0.9;
   color: black;
 }
@@ -493,7 +487,6 @@ li {
 /* -----------ADD ITEM FORM--------- */
 
 .admin-form-container {
-  font-family: "Raleway", sans-serif;
   display: flex;
   width: 100%;
   align-items: center;
@@ -535,8 +528,8 @@ li {
 
 .admin-form {
   padding: 2rem 3rem 3rem 3rem;
-  border: 2px solid grey;
-  background-color: rgb(242, 242, 242);
+  border: 2px solid var(--tertiaryColor);
+  background-color: var(--secondaryColor);
 }
 
 .edit-text-area {
@@ -555,7 +548,7 @@ li {
   display: grid;
   grid-template-columns: 15% 55% 15% 7% 7%;
   align-items: center;
-  border: 1px solid grey;
+  border: 1px solid var(--tertiaryColor);
 }
 
 .manage-item-image {
@@ -576,12 +569,12 @@ li {
 
 .edit-icon {
   cursor: pointer;
-  color: rgb(113, 153, 168);
+  color: var(--buttonPrimary);
 }
 
 .delete-icon {
   cursor: pointer;
-  color: rgb(179, 125, 125);
+  color: var(--dangerColor);
 }
 
 /* LOGIN/REGISTER PAGE */
@@ -609,7 +602,6 @@ li {
 }
 
 .checkout-details {
-  font-family: var(--mainFont);
   text-transform: uppercase;
   /* font-size: 1vw; */
   padding-top: 20%;
@@ -635,7 +627,7 @@ li {
   font-size: 1rem;
   font-weight: bold;
   background-color: var(--secondaryColor);
-  border: 1px solid black;
+  border: 1px solid var(--quarternaryColor);
   cursor: pointer;
 }
 
@@ -646,24 +638,23 @@ li {
 /* -------------BUTTONS------------- */
 
 .btn {
-  border: 1px solid black;
+  border: 1px solid var(--oppositePrimary);
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   font-size: 1.2rem;
-  font-family: "Raleway", sans-serif;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
 }
 
 .btn-primary {
-  color: white;
-  background-color: rgb(113, 153, 168);
+  color: var(--primaryColor);
+  background-color: var(--buttonPrimary);
 }
 
 .btn-danger {
-  color: white;
-  background-color: rgb(179, 125, 125);
+  color: var(--primaryColor);
+  background-color: var(--dangerColor);
 }
 
 .btn-row {
@@ -674,7 +665,6 @@ li {
 /* --------MESSAGES------- */
 
 .message {
-  font-family: var(--mainFont);
   text-align: center;
   font-size: 1.5rem;
   width: 40%;
@@ -684,15 +674,15 @@ li {
 }
 
 .success {
-  border: 1px solid green;
-  color: rgb(22, 54, 24);
-  background-color: rgb(212, 255, 214);
+  border: 1px solid var(--buttonSecondary);
+  color: var(--primaryColor);
+  background-color: var(--buttonPrimary);
 }
 
 .error {
-  border: 1px solid rgb(210, 150, 150);
-  color: rgb(54, 22, 22);
-  background-color: rgb(255, 219, 219);
+  border: 1px solid rgb(54, 22, 22);
+  color: var(--primaryColor);
+  background-color: var(--dangerColor);
 }
 
 .message-close {
@@ -702,11 +692,10 @@ li {
 }
 
 .message-close:hover {
-  color: rgb(180, 80, 80);
+  color: var(--quarternaryColor);
 }
 
 .hide-message {
-  background-color: red;
   opacity: 0;
 }
 
@@ -726,16 +715,16 @@ li {
   z-index: 1;
   width: 100%;
   text-align: center;
-  background-color: rgb(230, 230, 230);
-  color: rgb(120, 120, 120);
+  background-color: var(--secondaryColor);
+  color: var(--tertiaryColor);
   text-decoration: none;
   width: 6rem;
-  transition: all 0.4s ease;
+  transition: var(--mainTransition);
 }
 
 .drop-down-title:hover {
-  background-color: rgb(120, 120, 120);
-  color: rgb(230, 230, 230);
+  background-color: var(--tertiaryColor);
+  color: var(--secondaryColor);
 }
 
 .drop-down-list {
@@ -743,7 +732,7 @@ li {
   display: flex;
   flex-direction: column;
   transform: translatey(-101%);
-  transition: all 0.3s ease;
+  transition: var(--mainTransition);
   background-color: rgb(150, 150, 150);
   opacity: 0;
 }
@@ -760,11 +749,11 @@ li {
   height: 100%;
   background-color: transparent;
   text-decoration: none;
-  color: rgb(230, 230, 230);
+  color: var(--secondaryColor);
 }
 
 .drop-down-link:hover {
-  color: rgb(30, 30, 30);
+  color: var(--quarternaryColor);
 }
 
 .logout {

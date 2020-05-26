@@ -261,7 +261,7 @@ function checkFields(username, password, password2, master) {
 // Function to remove the image file when item is deleted or edited
 function removeImage(fileName) {
   // unlink here removes the file
-  fs.unlink("public/db_images/" + fileName, function(err) {
+  fs.unlink("public/db_images/" + fileName, function(e) {
     if (e) {
       console.log(e);
     }

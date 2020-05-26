@@ -84,8 +84,11 @@ closeCartBtn.addEventListener("click", () => {
   hideCart();
 });
 
-cartOverlay.addEventListener("click", () => {
-  hideCart();
+// closes the cart when clicked outside the cart window
+cartOverlay.addEventListener("click", event => {
+  if (!cartDOM.contains(event.target)) {
+    hideCart();
+  }
 });
 
 function showCart() {
@@ -174,7 +177,6 @@ function updateCart(cart) {
   });
 
   tempTotal = parseFloat(tempTotal.toFixed(2));
-  console.log(tempTotal);
 
   if (itemsTotal > 0) {
     tempPostage = 4.99;
@@ -250,6 +252,7 @@ function showSlides(n) {
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
-
-  slides[slideIndex - 1].style.display = "block";
+  if (slides[slideIndex - 1]) {
+    slides[slideIndex - 1].style.display = "block";
+  }
 }

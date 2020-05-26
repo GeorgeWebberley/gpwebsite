@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
   <title>GPWebsite</title>
-  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
   <script src="/script/script.js" defer>
   </script>
   <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
@@ -16,14 +16,14 @@
     <!-- NAVBAR -->
     <section class="navbar">
       <div class="menu-center">
-        <a href="/" class="site-icon">
+        <a href="/" title="Return to the homepage" class="site-icon">
           <div>Jewellery Shop</div>
         </a>
         <!-- NAVBAR LINKS -->
         <div class="navbar-links">
           <!-- LINK 1 -->
           <div class="drop-down">
-            <a class="drop-down-title" href="/admin">Admin</a>
+            <a class="drop-down-title" title="Go to the admin page" href="/admin">Admin</a>
             <div class="drop-down-list">
               <% if (login) { %>
                 <form action="/admin/logout?_method=DELETE" method="POST">
@@ -33,15 +33,15 @@
             </div>
           </div>
           <!-- LINK 2 -->
-          <a class="drop-down-title" href="/about">About</a>
+          <a class="drop-down-title" title="Go to the about page" href="/about">About</a>
           <!-- LINK 3 -->
           <div class="drop-down">
-            <a class="drop-down-title" href="/jewellery/all">Jewellery</a>
+            <a class="drop-down-title" title="See all jewellery the shop has to offer" href="/jewellery/all">Jewellery</a>
             <div class="drop-down-list">
-              <a class="drop-down-link" href="/jewellery/earring">Earrings</a>
-              <a class="drop-down-link" href="/jewellery/necklace">Necklaces</a>
-              <a class="drop-down-link" href="/jewellery/bracelet">Bracelets</a>
-              <a class="drop-down-link" href="/jewellery/ring">Rings</a>
+              <a class="drop-down-link" title="See all earrings the shop has to offer" href="/jewellery/earring">Earrings</a>
+              <a class="drop-down-link" title="See all necklaces the shop has to offer" href="/jewellery/necklace">Necklaces</a>
+              <a class="drop-down-link" title="See all bracelets the shop has to offer" href="/jewellery/bracelet">Bracelets</a>
+              <a class="drop-down-link" title="See all rings the shop has to offer" href="/jewellery/ring">Rings</a>
             </div>
           </div>
           <div class="cart-btn">
@@ -66,7 +66,7 @@
           <h2>Total : £
             <span class="total">0</span>
           </h2>
-          <a class="checkout" href="/jewellery/checkout">Checkout</a>
+          <a class="checkout" title="Proceed to checkout" href="/jewellery/checkout">Checkout</a>
         </div>
       </div>
     </div>
