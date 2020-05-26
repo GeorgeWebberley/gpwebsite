@@ -23,7 +23,7 @@ let cart = [];
 let add2CartButtons = [];
 
 function add2Cart() {
-  const buttons = [...document.querySelectorAll(".item-btn")];
+  const buttons = [...document.querySelectorAll(".add-to-basket")];
   add2CartButtons = buttons;
   buttons.forEach(button => {
     let id = button.dataset.id;
@@ -86,6 +86,13 @@ closeCartBtn.addEventListener("click", () => {
   hideCart();
 });
 
+// closes the cart when clicked outside the cart window
+cartOverlay.addEventListener("click", event => {
+  if (!cartDOM.contains(event.target)) {
+    hideCart();
+  }
+});
+
 function showCart() {
   cartOverlay.classList.add("transparentBackground");
   cartDOM.classList.add("showCart");
@@ -115,7 +122,7 @@ function addCartItem(item, destination) {
         <div class="remove-item" data-id=${item.id}>remove</div>
       </div>
       <div class="product-price">£${item.price}</div>
-       
+
     </div>
 `;
   destination.appendChild(div);
@@ -172,7 +179,6 @@ function updateCart(cart) {
   });
 
   tempTotal = parseFloat(tempTotal.toFixed(2));
-  console.log(tempTotal);
 
   if (itemsTotal > 0) {
     tempPostage = 4.99;
@@ -248,6 +254,7 @@ function showSlides(n) {
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
-
-  slides[slideIndex - 1].style.display = "block";
+  if (slides[slideIndex - 1]) {
+    slides[slideIndex - 1].style.display = "block";
+  }
 }

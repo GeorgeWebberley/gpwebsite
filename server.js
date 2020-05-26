@@ -3,6 +3,14 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 // ---- IMPORTS ----
+// const https = require("https");
+// const fs = require("fs");
+//
+// const options = {
+//   key: fs.readFileSync("/srv/www/keys/my-site-key.pem"),
+//   cert: fs.readFileSync("/srv/www/keys/chain.pem")
+// };
+
 const express = require("express"); // loads module 'express'
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
@@ -14,9 +22,9 @@ const session = require("express-session");
 const methodOverride = require("method-override");
 // ---- DATABASE SETUP ----
 const sqlite = require("sqlite");
-const initDb = require("./config/database").initDb;
+const dbConfig = require("./config/database");
 // Initial function for connecting to database. Creates tables if not yet created.
-initDb(sqlite);
+dbConfig.initDb();
 
 // ---- PASSPORT SETUP ----
 const passport = require("passport");
@@ -61,6 +69,11 @@ app.use(function (req, res, next) {
   res.locals.login = req.isAuthenticated();
   next();
 });
+//
+// app.use((req, res) => {
+//   res.writeHead(200);
+//   res.end("hello world\n");
+// });
 
 const indexRouter = require("./routes/index");
 const jewelleryRouter = require("./routes/jewellery");
@@ -73,6 +86,14 @@ app.use("/admin", adminRouter);
 
 // ---- SERVER CONNECT ----
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}...`);
+});
+
+// https.createServer(options, app).listen(8080);
+
+// Close database and server with ctrl-c
+process.on("SIGINT", () => {
+  dbConfig.close();
+  server.close();
 });

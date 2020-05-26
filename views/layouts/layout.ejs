@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
   <title>GPWebsite</title>
-  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
   <script src="/script/script.js" defer>
   </script>
   <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
@@ -13,24 +13,43 @@
 
 <body>
   <div class="content-wrap">
-    <section id="nav-bar">
-      <div class="menu-center">
-        <a href="/" class="site-icon">
-          <div>Jewellery Shop</div>
-        </a>
 
+    <!-- NAVBAR -->
+    <section class="navbar">
+      <div class="menu-center">
+        <a href="/" title="Return to the homepage" class="site-icon">
+          <div>Alistra</div>
+        </a>
+        <!-- NAVBAR LINKS -->
         <div class="navbar-links">
-          <% if (login) { %>
-          <form action="/admin/logout?_method=DELETE" method="POST">
-            <button class="logout navbar-link" type="submit">Logout</button>
-          </form>
-          <% } %>
-          <a class="navbar-link" href="/admin">Admin</a>
-          <a class="navbar-link" href="/about">About</a>
-          <a class="navbar-link" href="/jewellery/earring">Earrings</a>
-          <a class="navbar-link" href="/jewellery/necklace">Necklaces</a>
-          <a class="navbar-link" href="/jewellery/bracelet">Bracelets</a>
-          <a class="navbar-link" href="/jewellery/ring">Rings</a>
+          <!-- LINK 1 -->
+          <div class="drop-down">
+            <a class="drop-down-title" title="Go to the admin page" href="/admin">Admin</a>
+            <div class="drop-down-list">
+              <% if (login) { %>
+              <form action="/admin/logout?_method=DELETE" method="POST">
+                <button class="logout drop-down-link" type="submit">Logout</button>
+              </form>
+              <% } %>
+            </div>
+          </div>
+          <!-- LINK 2 -->
+          <a class="drop-down-title" title="Go to the about page" href="/about">About</a>
+          <!-- LINK 3 -->
+          <div class="drop-down">
+            <a class="drop-down-title" title="See all jewellery the shop has to offer"
+              href="/jewellery/all">Jewellery</a>
+            <div class="drop-down-list">
+              <a class="drop-down-link" title="See all earrings the shop has to offer"
+                href="/jewellery/earring">Earrings</a>
+              <a class="drop-down-link" title="See all necklaces the shop has to offer"
+                href="/jewellery/necklace">Necklaces</a>
+              <a class="drop-down-link" title="See all bracelets the shop has to offer"
+                href="/jewellery/bracelet">Bracelets</a>
+              <a class="drop-down-link" title="See all rings the shop has to offer" href="/jewellery/ring">Rings</a>
+            </div>
+          </div>
+          <!-- SHOPPING BASKET -->
           <div class="cart-btn">
             <span class="cart-icon">
               <i class="fas fa-shopping-bag"></i>
@@ -40,7 +59,7 @@
         </div>
       </div>
     </section>
-
+    <!-- END OF NAVBAR -->
 
     <!--Start of Cart-->
     <div class="cart-overlay">
@@ -49,82 +68,21 @@
           <i class="fas fa-window-close"></i>
         </span>
         <h2>my cart</h2>
-        <div class="cart-content">
-
-        </div>
+        <div class="cart-content"></div>
         <div class="cart-footer">
           <h2>Total : £
             <span class="total">0</span>
           </h2>
-          <a href="/jewellery/checkout"><button class="checkout">Checkout</button></a>
+          <a class="checkout" title="Proceed to checkout" href="/jewellery/checkout">Checkout</a>
         </div>
-
-
       </div>
     </div>
+    <!-- END OF CART -->
+
+    <!-- INSERTED HTML -->
     <%- body %>
-
-    <!-- <div class="slideshow-container">
-      <div class="mySlides fade">
-        <img class="landing" src="images/LandingImage1.png" />
-      </div>
-
-      <div class="mySlides fade">
-        <img class="landing" src="images/LandingImage2.png" />
-      </div>
-
-      <div class="mySlides fade">
-        <img class="landing" src="images/LandingImage3.png" />
-      </div>
-
-      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-      <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    </div>
-
-    <p class="about">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupixatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </p>
-
-    <div class="line"></div>
-
-    <h1 id="shop">Shop</h1>
-
-    <div class="grid">
-      <div class="grid_item">
-        <img src="images/Ring.png" />
-        <div class="overlay">
-          <div class="text">Rings</div>
-        </div>
-      </div>
-
-      <div class="grid_item">
-        <img src="images/Necklace.png" />
-        <div class="overlay">
-          <div class="text">Necklaces</div>
-        </div>
-      </div>
-
-      <div class="grid_item">
-        <img src="images/Earring.png" />
-        <div class="overlay">
-          <div class="text">Earrings</div>
-        </div>
-      </div>
-
-      <div class="grid_item">
-        <img src="images/Bracelet.png" />
-        <div class="overlay">
-          <div class="text">Bracelets</div>
-        </div>
-      </div>
-    </div> -->
   </div>
+  <!-- FOOTER -->
   <footer class="footer">
     <ul class="footerList">
       <li>About</li>
@@ -137,9 +95,9 @@
     </ul>
   </footer>
 
-  <!-- <script src="script.js" type="javascript"></script>
-
-    <script src="script/script.js"></script> -->
 </body>
+<<<<<<< HEAD </html>
+  =======
 
 </html>
+>>>>>>> 8202e729ee4130cd7dc3d1eae4f5c87e52797074

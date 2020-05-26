@@ -5,14 +5,14 @@
   <div class="item-list">
     <% jewellery.forEach(item => { %>
     <article class="manage-item">
-      <img class="manage-item-image" src="/db_images/<%= item.imageName %>" alt="product" class="item-img" />
+      <img class="manage-item-image" src="/db_images/<%= item.imageName %>" alt="Image of <%= item.name %>"/>
       <h3 class="manage-item-detail"><%= item.name %></h3>
       <h3 class="manage-item-detail">£<%= item.price %></h3>
-      <a href="/admin/editItem/<%= item.id %>">
+      <a href="/admin/editItem/<%= item.id %>" title="edit this item">
         <i class="edit-icon far fa-edit fa-lg"></i>
       </a>
       <form action="/admin/removeItem/<%= item.id %>?_method=DELETE" method="POST">
-        <button class="manage-delete" type="submit" name="button">
+        <button class="manage-delete" type="submit" name="button" title="delete this item">
           <i class="delete-icon fas fa-trash fa-2x"></i>
         </button>
       </form>

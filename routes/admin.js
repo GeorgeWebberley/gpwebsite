@@ -3,8 +3,9 @@ const express = require("express");
 require("dotenv").config();
 // get the router method from express
 const router = express.Router();
-const sqlite = require("sqlite");
-const getDb = require("../config/database").getDb;
+// const sqlite = require("sqlite");
+// const getDb = require("../config/database").getDb;
+const dbConfig = require("../config/database");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 // allows us to deal with image objects and save them
@@ -57,11 +58,13 @@ router.post("/register", checkNotAdmin, async (req, res) => {
     });
   } else {
     try {
-      const db = getDb(sqlite);
+      // const db = dbConfig.getDb();
       // Check if user exists
-      const user = await db.get(
-        `select count(1) as c from admin where username="${username}"`
-      );
+      const ps = dbConfig.getCountUsers();
+      const user = await ps.get(username);
+      // const user = await db.get(
+      //   `select count(1) as c from admin where username="${username}"`
+      // );
       // If user exists, render register page with error.
       if (user.c > 0) {
         errors.push({ msg: "A user with that username already exists." });
@@ -75,7 +78,8 @@ router.post("/register", checkNotAdmin, async (req, res) => {
       } else {
         // Else, we can hash the password and insert new admin into database
         const passwordHash = await bcrypt.hash(password, 10);
-        insertAdmin(username, passwordHash);
+        const ps = dbConfig.getInsertAdmin();
+        await ps.run(username, passwordHash);
         res.render("admin/login", {
           success: "Account made successfully! You can now login."
         });
@@ -100,36 +104,37 @@ router.get("/addItem", checkAdmin, (req, res) => {
   res.render("admin/addItem");
 });
 
-router.post(
-  "/addItem",
-  checkAdmin,
-  upload.single("image"),
-  async (req, res) => {
-    try {
-      const db = getDb(sqlite);
-      // Set the id to null so that it will auto-increment
-      await db.run(`insert into jewellery values (
-      NULL,
-      "${req.body.name}",
-      "${req.body.type}",
-      ${req.body.price},
-      "${req.file.filename}",
-      "${req.body.description}")`);
-      res.render("admin/addItem", {
-        success: "Success! Item added to database."
-      });
-    } catch (e) {
-      console.log(e);
-      res.render("admin/addItem", {
-        errorMessage: "Something went wrong. Please try again."
-      });
-    }
+router.post("/addItem", upload.single("image"), async (req, res) => {
+  try {
+    const ps = dbConfig.getInsertItem();
+    await ps.run(
+      req.body.name,
+      req.body.type,
+      req.body.price,
+      req.file.filename,
+      req.body.description
+    );
+    // await db.run(`insert into jewellery values (
+    // NULL,
+    // "${req.body.name}",
+    // "${req.body.type}",
+    // ${req.body.price},
+    // "${req.file.filename}",
+    // "${req.body.description}")`);
+    res.render("admin/addItem", {
+      success: "Success! Item added to database."
+    });
+  } catch (e) {
+    console.log(e);
+    res.render("admin/addItem", {
+      errorMessage: "Something went wrong. Please try again."
+    });
   }
-);
+});
 
 router.get("/removeItem", checkAdmin, async (req, res) => {
   try {
-    const db = getDb(sqlite);
+    const db = dbConfig.getDb();
     const jewellery = await db.all(`select * from jewellery ORDER BY name`);
     res.render("admin/removeItem", {
       jewellery: jewellery
@@ -142,8 +147,16 @@ router.get("/removeItem", checkAdmin, async (req, res) => {
 
 router.delete("/removeItem/:id", checkAdmin, async (req, res) => {
   try {
-    const db = getDb(sqlite);
-    await db.get(`DELETE FROM jewellery WHERE id=${req.params.id}`);
+    const ps = dbConfig.getSelectItem();
+    const item = await ps.get(req.params.id);
+    // const item = await db.get(
+    //   `SELECT * FROM jewellery WHERE id=${req.params.id}`
+    // );
+    const ps2 = dbConfig.getDeleteItem();
+    ps2.run(req.params.id);
+    // await db.get(`DELETE FROM jewellery WHERE id=${req.params.id}`);
+    removeImage(item.imageName);
+    const db = dbConfig.getDb();
     const jewellery = await db.all(`select * from jewellery ORDER BY name`);
     res.render("admin/removeItem", {
       jewellery: jewellery
@@ -156,10 +169,12 @@ router.delete("/removeItem/:id", checkAdmin, async (req, res) => {
 
 router.get("/editItem/:id", checkAdmin, async (req, res) => {
   try {
-    const db = getDb(sqlite);
-    const item = await db.get(
-      `select * from jewellery WHERE id=${req.params.id}`
-    );
+    // const db = dbConfig.getDb();
+    const ps = dbConfig.getSelectItem();
+    const item = await ps.get(req.params.id);
+    // const item = await db.get(
+    //   `select * from jewellery WHERE id=${req.params.id}`
+    // );
     res.render("admin/editItem", {
       item: item
     });
@@ -171,23 +186,35 @@ router.get("/editItem/:id", checkAdmin, async (req, res) => {
 
 router.put("/editItem/:id", upload.single("image"), async (req, res) => {
   try {
-    const db = getDb(sqlite);
-    let oldItem = await db.get(
-      `select * from jewellery WHERE id=${req.params.id}`
-    );
+    const ps = dbConfig.getSelectItem();
+    let oldItem = await ps.get(req.params.id);
+    // let oldItem = await db.get(
+    //   `select * from jewellery WHERE id=${req.params.id}`
+    // );
     let imageName = oldItem.imageName;
     if (req.file != null && req.file !== "") {
+      removeImage(imageName);
       imageName = req.file.filename;
     }
-    const item = await db.run(
-      `UPDATE jewellery SET
-          name="${req.body.name}",
-          type="${req.body.type}",
-          price=${req.body.price},
-          imageName="${imageName}",
-          description="${req.body.description}"
-          WHERE id=${req.params.id}`
+    const ps2 = dbConfig.getEditItem();
+    await ps2.run(
+      req.body.name,
+      req.body.type,
+      req.body.price,
+      imageName,
+      req.body.description,
+      req.params.id
     );
+    // const item = await db.run(
+    //   `UPDATE jewellery SET
+    //       name="${req.body.name}",
+    //       type="${req.body.type}",
+    //       price=${req.body.price},
+    //       imageName="${imageName}",
+    //       description="${req.body.description}"
+    //       WHERE id=${req.params.id}`
+    // );
+    const db = dbConfig.getDb();
     const jewellery = await db.all(`select * from jewellery ORDER BY name`);
     res.render("admin/removeItem", {
       jewellery: jewellery
@@ -218,16 +245,27 @@ function checkFields(username, password, password2, master) {
   return errors;
 }
 
-async function insertAdmin(username, passwordHash) {
-  try {
-    const db = getDb(sqlite);
-    await db.run(`insert into admin values (
-      NULL,
-      "${username}",
-      "${passwordHash}")`);
-  } catch (e) {
-    console.log(e);
-  }
+// async function insertAdmin(username, passwordHash) {
+//   try {
+//     const db = getDb(sqlite);
+//     await db.run(`insert into admin values (
+//       NULL,
+//       "${username}",
+//       "${passwordHash}")`);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// }
+//
+
+// Function to remove the image file when item is deleted or edited
+function removeImage(fileName) {
+  // unlink here removes the file
+  fs.unlink("public/db_images/" + fileName, function(e) {
+    if (e) {
+      console.log(e);
+    }
+  });
 }
 
 function checkNotAdmin(req, res, next) {
