@@ -2,14 +2,6 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-// ---- IMPORTS ----
-// const https = require("https");
-// const fs = require("fs");
-//
-// const options = {
-//   key: fs.readFileSync("/srv/www/keys/my-site-key.pem"),
-//   cert: fs.readFileSync("/srv/www/keys/chain.pem")
-// };
 
 const express = require("express"); // loads module 'express'
 const app = express();

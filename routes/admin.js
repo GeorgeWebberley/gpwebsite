@@ -60,13 +60,13 @@ router.post("/register", checkNotAdmin, async (req, res) => {
     try {
       // const db = dbConfig.getDb();
       // Check if user exists
-      const ps = dbConfig.getCountUsers();
+      const ps = dbConfig.getSelectUser();
       const user = await ps.get(username);
       // const user = await db.get(
       //   `select count(1) as c from admin where username="${username}"`
       // );
       // If user exists, render register page with error.
-      if (user.c > 0) {
+      if (user) {
         errors.push({ msg: "A user with that username already exists." });
         res.render("admin/register", {
           errors,

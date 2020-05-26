@@ -1,0 +1,173 @@
+/* -----------LOGIN/REGISTER PAGE----------- */
+
+.admin-form-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 2rem 0;
+}
+
+.admin-form-title {
+  text-align: center;
+  margin: 0;
+  font-weight: normal;
+}
+
+.bar {
+  width: 100%;
+  height: 1px;
+  margin-bottom: 2rem;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    black,
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.form-grid {
+  font-weight: lighter;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-row-gap: 1.5rem;
+  grid-column-gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.admin-form {
+  padding: 2rem 3rem 3rem 3rem;
+  border: 2px solid var(--tertiaryColor);
+  background-color: var(--secondaryColor);
+}
+
+.login-link {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+/* -----------ADD OR REMOVE ITEMS-----------*/
+.manage-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--tertiaryColor);
+}
+
+.manage-options {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+}
+
+.add-remove {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem 2rem 2rem;
+}
+
+.manage-image {
+  width: 20rem;
+  min-height: 100%;
+  border: 1px solid var(--tertiaryColor);
+  opacity: 0.9;
+  color: black;
+}
+
+.manage-image:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 5px;
+  opacity: 1;
+}
+
+/* -----------ADD ITEM FORM--------- */
+
+.pound {
+  font-size: 0.8rem;
+}
+
+.edit-text-area {
+  width: 20rem;
+  height: 10rem;
+}
+
+/* -----------EDIT/REMOVE ITEMS----------- */
+.item-list {
+  width: 100%;
+}
+
+.manage-item {
+  margin: 2% 15%;
+  max-width: 70%;
+  display: grid;
+  grid-template-columns: 15% 55% 15% 7% 7%;
+  align-items: center;
+  border: 1px solid var(--tertiaryColor);
+}
+
+.manage-item-image {
+  margin: 0.5rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+.manage-item-detail {
+  margin: 0 0.5rem;
+}
+
+.manage-delete {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.edit-icon {
+  cursor: pointer;
+  color: var(--buttonPrimary);
+}
+
+.delete-icon {
+  cursor: pointer;
+  color: var(--dangerColor);
+}
+
+/* --------MESSAGES------- */
+
+.message {
+  text-align: center;
+  font-size: 1.5rem;
+  width: 50%;
+  margin: auto;
+  border-radius: 1%;
+  padding: 0.2rem;
+}
+
+.success {
+  border: 1px solid var(--buttonSecondary);
+  color: var(--primaryColor);
+  background-color: var(--buttonPrimary);
+}
+
+.error {
+  border: 1px solid rgb(54, 22, 22);
+  color: var(--primaryColor);
+  background-color: var(--dangerColor);
+}
+
+.message-close {
+  float: right;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.message-close:hover {
+  color: var(--quarternaryColor);
+}
+
+.hide-message {
+  opacity: 0;
+}
