@@ -1,7 +1,5 @@
 "use strict";
 
-// const nodemon = require("nodemon");
-
 // ---- ASSIGNMENT OF VARIABLES TO QUERY SELECTORS ---- //
 
 const checkoutBtn = document.querySelector(".checkout");
@@ -41,17 +39,15 @@ cartBtn.addEventListener("click", () => {
 closeCartBtn.addEventListener("click", () => {
   hideCart();
 });
-
+// Goes to checkout
+checkoutBtn.addEventListener("click", () => {
+  cart.forEach(item => this.addCartItem(item, checkoutSummary));
+});
 // Closes the cart when clicked outside the cart window
 cartOverlay.addEventListener("click", event => {
   if (!cartDOM.contains(event.target)) {
     hideCart();
   }
-});
-
-// Goes to checkout
-checkoutBtn.addEventListener("click", () => {
-  cart.forEach(item => this.addCartItem(item, checkoutSummary));
 });
 // Closes messages
 if (closeMessage != null) {
@@ -63,6 +59,8 @@ if (closeMessage != null) {
 function hideMessage() {
   message.classList.add("hide-message");
 }
+
+
 
 // ---- ADD TO CART AND CART CONTROL FUNCTIONS ---- //
 
@@ -254,6 +252,11 @@ document.addEventListener("DOMContentLoaded", () => {
   cartController();
 });
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> af23cf61143da9a6c2eeac9575a3f2d5607621d6
 // ---- HOME PAGE CAROUSEL ---- //
 
 var slideIndex = 1;

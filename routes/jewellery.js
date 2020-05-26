@@ -11,6 +11,10 @@ router.get("/checkout", (req, res) => {
   res.render("checkout");
 });
 
+router.get("/advertising", (req, res) => {
+  res.render("advertising");
+});
+
 router.get("/all", async (req, res) => {
   try {
     const db = getDb();
