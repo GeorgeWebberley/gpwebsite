@@ -35,7 +35,7 @@ if (modifyBtn != null) {
 cartBtn.addEventListener("click", () => {
   showCart();
 });
-// Closes cart 
+// Closes cart
 closeCartBtn.addEventListener("click", () => {
   hideCart();
 });
@@ -75,7 +75,7 @@ function hideCart() {
   cartDOM.classList.remove("showCart");
 }
 
-// Function that loads product details from item into JSON object which is added 
+// Function that loads product details from item into JSON object which is added
 // to cart array and stored in local storage
 function add2Cart() {
   const buttons = [...document.querySelectorAll(".add-to-basket")];
@@ -239,7 +239,7 @@ function removeItem(id) {
   let button = add2CartButtons.find(button => button.dataset.id === id);
   if (button != undefined) {
     button.disabled = false;
-    button.innerHTML = `<i class="fas fa-shopping-cart"></i> ADD TO BASKET`;
+    button.innerHTML = `<i class="fas fa-shopping-cart"></i> <p>ADD TO BASKET</p>`;
   }
 }
 
@@ -252,8 +252,11 @@ document.addEventListener("DOMContentLoaded", () => {
   cartController();
 });
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> af23cf61143da9a6c2eeac9575a3f2d5607621d6
 // ---- HOME PAGE CAROUSEL ---- //
 
 var slideIndex = 1;
