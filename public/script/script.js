@@ -1,5 +1,5 @@
 "use strict";
-
+// ---- ASSIGNMENT OF VARIABLES TO QUERY SELECTORS ---- //
 const checkoutBtn = document.querySelector(".checkout");
 const cartBtn = document.querySelector(".cart-btn");
 const modifyBtn = document.querySelector(".modify-btn");
@@ -22,6 +22,8 @@ const postage = document.querySelector(".postage");
 let cart = [];
 let add2CartButtons = [];
 
+// ---- ADD TO CART FUNCTION ---- //
+
 function add2Cart() {
   const buttons = [...document.querySelectorAll(".add-to-basket")];
   add2CartButtons = buttons;
@@ -33,7 +35,8 @@ function add2Cart() {
       button.innerText = "In Cart";
       button.disabled = true;
     }
-
+    // For each add to cart button that is clicked pull item data and load into
+    // product json which is loaded into cart array
     button.addEventListener("click", event => {
       event.target.innerText = "In Cart";
       event.target.disabled = true;
@@ -58,19 +61,18 @@ function add2Cart() {
   });
 }
 
+// Save or retrieve cart array of JSON product objects from local storage
 class Storage {
   static saveCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }
   static getCart() {
+    //if return local storage has cart return it, else return empty array
     return localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
   }
 }
-
-//SHOPPING CART//
-//variables
 
 if (modifyBtn != null) {
   modifyBtn.addEventListener("click", () => {
