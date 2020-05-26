@@ -57,7 +57,7 @@ app.use(passport.initialize());
 // saves our session variables accross the application
 app.use(passport.session());
 // Middleware function that checks if user is logged in and sets a variable if they are.
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.login = req.isAuthenticated();
   next();
 });

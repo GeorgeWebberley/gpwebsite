@@ -1,3 +1,5 @@
+"use strict";
+
 const checkoutBtn = document.querySelector(".checkout");
 const cartBtn = document.querySelector(".cart-btn");
 const modifyBtn = document.querySelector(".modify-btn");
