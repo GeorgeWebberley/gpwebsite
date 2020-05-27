@@ -1,11 +1,12 @@
 "use strict";
 const express = require("express");
+// So we can access the environment variables
 require("dotenv").config();
 // get the router method from express
 const router = express.Router();
-// const sqlite = require("sqlite");
-// const getDb = require("../config/database").getDb;
+// For managing database commands
 const dbConfig = require("../config/database");
+// For password encryption
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 // allows us to deal with image objects and save them
@@ -26,14 +27,17 @@ const upload = multer({
   }
 });
 
+// Login page
 router.get("/login", checkNotAdmin, (req, res) => {
   res.render("admin/login");
 });
 
+// Register page
 router.get("/register", checkNotAdmin, (req, res) => {
   res.render("admin/register");
 });
 
+// Check login details
 router.post(
   "/login",
   checkNotAdmin,
@@ -44,11 +48,11 @@ router.post(
   })
 );
 
+// validate input and create new user
 router.post("/register", checkNotAdmin, async (req, res) => {
   const { username, password, password2, master } = req.body;
   const errors = checkFields(username, password, password2, master);
   if (errors.length > 0) {
-    // the second argument here (the object) are variables we want to pass in when rendering the page
     res.render("admin/register", {
       errors,
       username,
@@ -58,14 +62,10 @@ router.post("/register", checkNotAdmin, async (req, res) => {
     });
   } else {
     try {
-      // const db = dbConfig.getDb();
       // Check if user exists
       const ps = dbConfig.getSelectUser();
       const user = await ps.get(username);
-      // const user = await db.get(
-      //   `select count(1) as c from admin where username="${username}"`
-      // );
-      // If user exists, render register page with error.
+      // If user already exists, render register page with error.
       if (user) {
         errors.push({ msg: "A user with that username already exists." });
         res.render("admin/register", {
@@ -91,19 +91,23 @@ router.post("/register", checkNotAdmin, async (req, res) => {
   }
 });
 
+// Logout link. Passports handles finishing the session.
 router.delete("/logout", (req, res) => {
   req.logOut();
   res.redirect("/admin/login");
 });
 
+// Admin home
 router.get("/", checkAdmin, (req, res) => {
   res.render("admin/manageItems");
 });
 
+// New item page
 router.get("/addItem", checkAdmin, (req, res) => {
   res.render("admin/addItem");
 });
 
+// Create a new item
 router.post("/addItem", upload.single("image"), async (req, res) => {
   try {
     const ps = dbConfig.getInsertItem();
@@ -114,13 +118,6 @@ router.post("/addItem", upload.single("image"), async (req, res) => {
       req.file.filename,
       req.body.description
     );
-    // await db.run(`insert into jewellery values (
-    // NULL,
-    // "${req.body.name}",
-    // "${req.body.type}",
-    // ${req.body.price},
-    // "${req.file.filename}",
-    // "${req.body.description}")`);
     res.render("admin/addItem", {
       success: "Success! Item added to database."
     });
@@ -132,6 +129,7 @@ router.post("/addItem", upload.single("image"), async (req, res) => {
   }
 });
 
+// edit/delete item page
 router.get("/removeItem", checkAdmin, async (req, res) => {
   try {
     const db = dbConfig.getDb();
@@ -145,16 +143,14 @@ router.get("/removeItem", checkAdmin, async (req, res) => {
   }
 });
 
+// Delete an item
 router.delete("/removeItem/:id", checkAdmin, async (req, res) => {
   try {
     const ps = dbConfig.getSelectItem();
     const item = await ps.get(req.params.id);
-    // const item = await db.get(
-    //   `SELECT * FROM jewellery WHERE id=${req.params.id}`
-    // );
     const ps2 = dbConfig.getDeleteItem();
-    ps2.run(req.params.id);
-    // await db.get(`DELETE FROM jewellery WHERE id=${req.params.id}`);
+    await ps2.run(req.params.id);
+    // Delete the image file from the /public/images folder
     removeImage(item.imageName);
     const db = dbConfig.getDb();
     const jewellery = await db.all(`select * from jewellery ORDER BY name`);
@@ -167,14 +163,11 @@ router.delete("/removeItem/:id", checkAdmin, async (req, res) => {
   }
 });
 
+// edit item page
 router.get("/editItem/:id", checkAdmin, async (req, res) => {
   try {
-    // const db = dbConfig.getDb();
     const ps = dbConfig.getSelectItem();
     const item = await ps.get(req.params.id);
-    // const item = await db.get(
-    //   `select * from jewellery WHERE id=${req.params.id}`
-    // );
     res.render("admin/editItem", {
       item: item
     });
@@ -184,14 +177,13 @@ router.get("/editItem/:id", checkAdmin, async (req, res) => {
   }
 });
 
+// update an item in the database
 router.put("/editItem/:id", upload.single("image"), async (req, res) => {
   try {
     const ps = dbConfig.getSelectItem();
     let oldItem = await ps.get(req.params.id);
-    // let oldItem = await db.get(
-    //   `select * from jewellery WHERE id=${req.params.id}`
-    // );
     let imageName = oldItem.imageName;
+    // If the user has changed the image we delete the old image and update with the new.
     if (req.file != null && req.file !== "") {
       removeImage(imageName);
       imageName = req.file.filename;
@@ -205,15 +197,6 @@ router.put("/editItem/:id", upload.single("image"), async (req, res) => {
       req.body.description,
       req.params.id
     );
-    // const item = await db.run(
-    //   `UPDATE jewellery SET
-    //       name="${req.body.name}",
-    //       type="${req.body.type}",
-    //       price=${req.body.price},
-    //       imageName="${imageName}",
-    //       description="${req.body.description}"
-    //       WHERE id=${req.params.id}`
-    // );
     const db = dbConfig.getDb();
     const jewellery = await db.all(`select * from jewellery ORDER BY name`);
     res.render("admin/removeItem", {
@@ -225,6 +208,7 @@ router.put("/editItem/:id", upload.single("image"), async (req, res) => {
   }
 });
 
+// Validation checks on user form input
 function checkFields(username, password, password2, master) {
   let errors = [];
   // Check required fields
@@ -245,22 +229,8 @@ function checkFields(username, password, password2, master) {
   return errors;
 }
 
-// async function insertAdmin(username, passwordHash) {
-//   try {
-//     const db = getDb(sqlite);
-//     await db.run(`insert into admin values (
-//       NULL,
-//       "${username}",
-//       "${passwordHash}")`);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
-//
-
 // Function to remove the image file when item is deleted or edited
 function removeImage(fileName) {
-  // unlink here removes the file
   fs.unlink("public/db_images/" + fileName, function(e) {
     if (e) {
       console.log(e);
@@ -268,6 +238,7 @@ function removeImage(fileName) {
   });
 }
 
+// Functions that allow us to redirect the user appropriately if the user is logged in or not logged in
 function checkNotAdmin(req, res, next) {
   if (req.isAuthenticated()) {
     return res.redirect("/admin");
