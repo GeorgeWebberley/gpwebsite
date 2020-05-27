@@ -60,8 +60,6 @@ function hideMessage() {
   message.classList.add("hide-message");
 }
 
-
-
 // ---- ADD TO CART AND CART CONTROL FUNCTIONS ---- //
 
 // Shows cart
@@ -252,11 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
   cartController();
 });
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> af23cf61143da9a6c2eeac9575a3f2d5607621d6
 // ---- HOME PAGE CAROUSEL ---- //
 
 var slideIndex = 1;
