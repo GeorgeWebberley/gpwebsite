@@ -60,8 +60,6 @@ function hideMessage() {
   message.classList.add("hide-message");
 }
 
-
-
 // ---- ADD TO CART AND CART CONTROL FUNCTIONS ---- //
 
 // Shows cart

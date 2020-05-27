@@ -1,13 +1,13 @@
 "use strict";
 const express = require("express");
-
-// get the router method from express
 const router = express.Router();
 
+// Home page
 router.get("/", async (req, res) => {
   res.render("index");
 });
 
+// About page
 router.get("/about", (req, res) => {
   res.render("about");
 });

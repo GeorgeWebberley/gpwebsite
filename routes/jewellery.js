@@ -7,14 +7,17 @@ const getDb = require("../config/database").getDb;
 // get the router method from express
 const router = express.Router();
 
+// checkout page
 router.get("/checkout", (req, res) => {
   res.render("checkout");
 });
 
+// advertising page
 router.get("/advertising", (req, res) => {
   res.render("advertising");
 });
 
+// All jewellery page
 router.get("/all", async (req, res) => {
   try {
     const db = getDb();
@@ -28,14 +31,11 @@ router.get("/all", async (req, res) => {
   }
 });
 
+// Load jewellery of a certain type
 router.get("/:type", async (req, res) => {
   try {
-    // const db = getDb();
     const ps = dbConfig.getSelectType();
     const jewellery = await ps.all(req.params.type);
-    // const jewellery = await db.all(
-    //   `select * from jewellery where type="${req.params.type}"`
-    // );
     res.render("jewellery/list", {
       jewellery: jewellery,
       type: req.params.type
@@ -46,16 +46,9 @@ router.get("/:type", async (req, res) => {
   }
 });
 
+// get specific item page
 router.get("/:type/:id", async (req, res) => {
   try {
-    // const db = getDb();
-    // const item = await db.get(
-    //   `select * from jewellery where rowid="${req.params.id}"`
-    // );
-    // const similarProducts = await db.all(
-    //   `select * from jewellery where type="${req.params.type}"`
-    // );
-
     const ps = dbConfig.getSelectItem();
     const item = await ps.get(req.params.id);
     const ps2 = dbConfig.getSelectType();
