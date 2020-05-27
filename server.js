@@ -6,11 +6,13 @@ const express = require("express"); // loads module 'express'
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
-// Handles some security by setting various HTTP headers
+// helmet handles some security by setting various HTTP headers
 const helmet = require("helmet");
+// For flash messages.
 const flash = require("express-flash");
 const session = require("express-session");
 const methodOverride = require("method-override");
+
 // ---- DATABASE SETUP ----
 const dbConfig = require("./config/database");
 // Initial function for connecting to database. Creates tables if not yet created.
@@ -36,10 +38,10 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 // tells express where our public files will be.
 app.use(express.static("public"));
-// Allows us to use 'DELETE' requests in forms
+// Allows us to use 'DELETE' and 'PUT' requests in forms
 app.use(methodOverride("_method"));
 // tells bodyparser to parse urlencoded bodies and only look at requests where the Content-Type header matches the type option
-// accepts only UTF-8 encoding of body. POST limit increased to 10mb.
+// accepts only UTF-8 encoding of body. POST limit increased to 10mb for images.
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
 // allows use of flash messages
 app.use(flash());
@@ -55,7 +57,7 @@ app.use(passport.initialize());
 // saves our session variables accross the application
 app.use(passport.session());
 // Middleware function that checks if user is logged in and sets a variable if they are.
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   res.locals.login = req.isAuthenticated();
   next();
 });
@@ -75,7 +77,11 @@ const server = app.listen(PORT, () => {
 });
 
 // Close database and server with ctrl-c
-process.on("SIGINT", () => {
-  dbConfig.close();
-  server.close();
+process.on("SIGINT", async () => {
+  try {
+    await dbConfig.close();
+    server.close();
+  } catch (e) {
+    console.log(e);
+  }
 });

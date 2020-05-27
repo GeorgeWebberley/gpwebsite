@@ -127,16 +127,20 @@ function getDeserialiseUser() {
 }
 
 // Closing function that is called when program terminates with ctrl-c
-function close() {
-  insertAdmin.finalize();
-  insertItem.finalize();
-  editItem.finalize();
-  deleteItem.finalize();
-  selectItem.finalize();
-  selectType.finalize();
-  selectUser.finalize();
-  deserialiseUser.finalize();
-  db.close();
+async function close() {
+  try {
+    await insertAdmin.finalize();
+    await insertItem.finalize();
+    await editItem.finalize();
+    await deleteItem.finalize();
+    await selectItem.finalize();
+    await selectType.finalize();
+    await selectUser.finalize();
+    await deserialiseUser.finalize();
+    await db.close();
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 module.exports = {
