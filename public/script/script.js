@@ -81,7 +81,6 @@ function add2Cart() {
   buttons.forEach(button => {
     let id = button.dataset.id;
     let inCart = cart.find(item => item.id === id);
-
     if (inCart) {
       button.innerText = "In Cart";
       button.disabled = true;
@@ -91,7 +90,6 @@ function add2Cart() {
     button.addEventListener("click", event => {
       event.target.innerText = "In Cart";
       event.target.disabled = true;
-
       let name = button.dataset.name;
       let price = button.dataset.price;
       let imageName = button.dataset.image;
@@ -237,7 +235,7 @@ function removeItem(id) {
   let button = add2CartButtons.find(button => button.dataset.id === id);
   if (button != undefined) {
     button.disabled = false;
-    button.innerHTML = `<i class="fas fa-shopping-cart"></i> <p>ADD TO BASKET</p>`;
+    button.innerHTML = `ADD TO BASKET`;
   }
 }
 
