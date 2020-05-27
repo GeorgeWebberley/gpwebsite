@@ -1,4 +1,3 @@
-
 /* ------- ADVERTISING PAGE IMAGE SLIDESHOW-------- */
 
 .banner-background {
@@ -9,8 +8,8 @@
   height: 1.5%;
 }
 
-.banner{
-  color:white;
+.banner {
+  color: white;
   text-transform: uppercase;
   font-size: 1vw;
   animation: banner 15s infinite linear;
@@ -29,8 +28,8 @@
   }
 }
 
-.ad-image{
-  width: 100%;  
+.ad-image {
+  width: 100%;
 }
 
 /* -------INDEX PAGE IMAGE SLIDESHOW-------- */
