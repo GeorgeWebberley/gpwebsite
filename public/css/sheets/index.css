@@ -1,3 +1,4 @@
+/* ------- ADVERTISING PAGE IMAGE SLIDESHOW-------- */
 .banner-background{
   background-color: var(--tertiaryColor);
   z-index: 1;
@@ -8,10 +9,9 @@
 
 .banner{
   color:white;
-  font-family: helvetica;
   text-transform: uppercase;
   font-size: 1vw;
-  animation: banner 10s infinite linear;
+  animation: banner 15s infinite linear;
   position: absolute;
   left: -40%;
    white-space: nowrap;
@@ -28,8 +28,7 @@
 }
 
 .ad-image{
-  width: 100%;
-  
+  width: 100%;  
 }
 
 /* -------INDEX PAGE IMAGE SLIDESHOW-------- */

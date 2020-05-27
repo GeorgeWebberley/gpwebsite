@@ -41,6 +41,7 @@
   transition: var(--mainTransition);
   transform: translateX(101%);
   cursor: pointer;
+  font-family: var(--mainFont);
 }
 .item-btn:hover {
   color: var(--primaryColor);

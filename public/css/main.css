@@ -111,8 +111,8 @@ body {
 .footer {
   position: absolute;
   width: 100%;
-  bottom: 0;
-  height: 175px;
+  bottom: 50;
+  height: 20%;
   background-color: var(--secondaryColor);
 }
 
